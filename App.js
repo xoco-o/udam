@@ -8,7 +8,7 @@ export default function App() {
     return (
         <NavigationContainer>
             <View style={styles.container}>
-                <Text>Open up App.js to start working on your app!</Text>
+                <Text>Text</Text>
                 <View style={{ width: 300 }}>
                     <BaseButton>Base buttons</BaseButton>
                     <SolidButton color={colors.red[400]}>Solid button</SolidButton>
