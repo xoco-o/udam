@@ -75,3 +75,19 @@ export function TextButton({ disabled, children, onPress, onLongPress, color = c
         </BaseButton>
     );
 }
+
+export function PrimaryButton({ children, ...props }) {
+    return (
+        <SolidButton color={colors.orange[400]} {...props}>
+            {children}
+        </SolidButton>
+    );
+}
+
+export function SecondaryButton({ children, ...props }) {
+    return (
+        <SolidButton color={colors.blue[400]} {...props}>
+            {children}
+        </SolidButton>
+    );
+}
