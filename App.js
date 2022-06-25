@@ -13,6 +13,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import MenuBorder from "./components/MenuBorder";
 import { ScreenLoader, BlockLoader, ModalLoader } from "./components/Loaders";
 import ClassicModal from "./components/ClassicModal";
+import SelectField from "./components/SelectField";
 
 export default function App() {
     const [checked, setChecked] = useState(false);
@@ -31,6 +32,16 @@ export default function App() {
                                 <TextField label="Desc" multiline help="Please enter your name" />
                                 <Checkbox label="Checkbox" value={checked} onValueChange={setChecked} />
                                 <TextField disabled label="Disabled" help="Please enter your name" />
+                                <SelectField
+                                    value="male"
+                                    onChange={(val) => alert(val)}
+                                    items={[
+                                        { value: "female", label: "Female" },
+                                        { value: "male", label: "Male" },
+                                    ]}
+                                    label="Select"
+                                    placeholder="Please select your gender"
+                                />
                             </View>
                         </Box>
 
@@ -75,6 +86,7 @@ export default function App() {
                                 icon={<FontAwesome5 name="check-square" size={s(18)} color={colors.brown[400]} />}
                                 onPress={() => alert("onPress")}
                                 onLongPress={() => alert("onLongPress")}
+                                hasChevron
                             />
                         </Box>
 

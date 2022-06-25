@@ -1,6 +1,7 @@
 import { TouchableHighlight, Text, TouchableOpacity } from "react-native";
 import colors from "../utils/colors";
 import s from "../utils/getRelativeSize";
+import noop from "../utils/noop";
 
 const initialContainerStyles = {
     width: "100%",
@@ -23,8 +24,6 @@ const initialTextStyles = {
     textTransform: "uppercase",
     color: colors.black,
 };
-
-function noop() {}
 
 export function BaseButton({ disabled = false, children, onPress = noop, onLongPress = noop, underlayColor, Touchable = TouchableOpacity, containerStyles = {}, textStyles = {} }) {
     return (
