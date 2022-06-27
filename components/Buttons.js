@@ -4,7 +4,7 @@ import s from "../utils/getRelativeSize";
 import noop from "../utils/noop";
 
 const initialContainerStyles = {
-    width: "100%",
+    flex: 1,
     flexDirection: "row",
     paddingHorizontal: s(25),
     paddingVertical: s(15),
@@ -43,32 +43,30 @@ export function BaseButton({ disabled = false, children, onPress = noop, onLongP
     );
 }
 
-export function SolidButton({ disabled, children, onPress, onLongPress, color = colors.black }) {
+export function SolidButton({ children, color = colors.black, containerStyles, textStyles, ...props }) {
     return (
-        <BaseButton disabled={disabled} onPress={onPress} onLongPress={onLongPress} containerStyles={{ borderColor: color, backgroundColor: color }} textStyles={{ color: colors.white }}>
+        <BaseButton containerStyles={{ borderColor: color, backgroundColor: color, ...containerStyles }} textStyles={{ color: colors.white, ...textStyles }} {...props}>
             {children}
         </BaseButton>
     );
 }
 
-export function OutlinedButton({ disabled, children, onPress, onLongPress, color = colors.black }) {
+export function OutlinedButton({ children, color = colors.black, containerStyles, textStyles, ...props }) {
     return (
-        <BaseButton disabled={disabled} onPress={onPress} onLongPress={onLongPress} containerStyles={{ borderColor: color, backgroundColor: "transparent" }} textStyles={{ color: color }}>
+        <BaseButton containerStyles={{ borderColor: color, backgroundColor: "transparent", ...containerStyles }} textStyles={{ color: color, ...textStyles }} {...props}>
             {children}
         </BaseButton>
     );
 }
 
-export function TextButton({ disabled, children, onPress, onLongPress, color = colors.black }) {
+export function TextButton({ children, underlayColor = colors.grey[300], color = colors.black, containerStyles, textStyles, ...props }) {
     return (
         <BaseButton
-            disabled={disabled}
             Touchable={TouchableHighlight}
-            underlayColor={colors.grey[300]}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            containerStyles={{ borderColor: "transparent", backgroundColor: "transparent" }}
-            textStyles={{ color: color }}
+            underlayColor={underlayColor}
+            containerStyles={{ borderColor: "transparent", backgroundColor: "transparent", ...containerStyles }}
+            textStyles={{ color: color, ...textStyles }}
+            {...props}
         >
             {children}
         </BaseButton>
