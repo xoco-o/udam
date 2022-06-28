@@ -5,8 +5,11 @@ import s, { designWidth } from "../utils/getRelativeSize";
 import { useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import lorem from "../utils/lorem";
+import { useNavigation } from "@react-navigation/native";
 
-export default function LoginScreen() {
+export default function GuestHomeScreen() {
+    const navigation = useNavigation();
+
     return (
         <View style={{ flex: 1, backgroundColor: colors.grey[900] }}>
             <View style={{ flex: 1 }}>
@@ -15,8 +18,12 @@ export default function LoginScreen() {
 
             <View style={{ position: "absolute", right: 0, left: 0, bottom: s(30) }}>
                 <View style={{ flexDirection: "row", marginHorizontal: s(10) }}>
-                    <PrimaryButton containerStyles={{ marginRight: s(10) }}>Нэвтрэх</PrimaryButton>
-                    <SecondaryButton>Бүртгүүлэх</SecondaryButton>
+                    <View style={{ flex: 1, marginRight: s(15) }}>
+                        <PrimaryButton onPress={() => navigation.navigate("GuestLogin")}>Нэвтрэх</PrimaryButton>
+                    </View>
+                    <View style={{ flex: 1 }}>
+                        <SecondaryButton onPress={() => navigation.navigate("GuestSignup")}>Бүртгүүлэх</SecondaryButton>
+                    </View>
                 </View>
             </View>
 
@@ -61,7 +68,7 @@ function Walkthrough() {
             >
                 <View style={{ flexDirection: "row" }}>
                     {sampleList.map((item) => (
-                        <ScrollItem item={item} key={item.id} />
+                        <WalkthroughItem item={item} key={item.id} />
                     ))}
                 </View>
             </ScrollView>
@@ -75,7 +82,7 @@ function Walkthrough() {
     );
 }
 
-function ScrollItem({ item }) {
+function WalkthroughItem({ item }) {
     return (
         <ImageBackground source={item.image} resizeMode="cover" style={{ width: s(designWidth), alignItems: "center", justifyContent: "flex-end" }}>
             <View style={{ padding: s(20), marginBottom: s(130) }}>

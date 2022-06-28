@@ -4,9 +4,8 @@ import s from "../utils/getRelativeSize";
 import noop from "../utils/noop";
 
 const initialContainerStyles = {
-    flex: 1,
     flexDirection: "row",
-    paddingHorizontal: s(25),
+    width: "100%",
     paddingVertical: s(15),
     borderRadius: s(15),
     justifyContent: "center",
@@ -38,7 +37,9 @@ export function BaseButton({ disabled = false, children, onPress = noop, onLongP
                 opacity: disabled ? 0.5 : 1,
             }}
         >
-            <Text style={{ ...initialTextStyles, ...textStyles }}>{children}</Text>
+            <Text numberOfLines={1} style={{ ...initialTextStyles, ...textStyles }}>
+                {children}
+            </Text>
         </Touchable>
     );
 }
@@ -59,12 +60,24 @@ export function OutlinedButton({ children, color = colors.black, containerStyles
     );
 }
 
-export function TextButton({ children, underlayColor = colors.grey[300], color = colors.black, containerStyles, textStyles, ...props }) {
+export function TextButton({ children, underlayColor = colors.grey[100], color = colors.black, containerStyles, textStyles, ...props }) {
     return (
         <BaseButton
             Touchable={TouchableHighlight}
             underlayColor={underlayColor}
             containerStyles={{ borderColor: "transparent", backgroundColor: "transparent", ...containerStyles }}
+            textStyles={{ color: color, ...textStyles }}
+            {...props}
+        >
+            {children}
+        </BaseButton>
+    );
+}
+
+export function InlineTextButton({ children, color = colors.black, containerStyles, textStyles, ...props }) {
+    return (
+        <BaseButton
+            containerStyles={{ borderColor: "transparent", backgroundColor: "transparent", paddingVertical: s(5), paddingHorizontal: s(5), width: "auto", ...containerStyles }}
             textStyles={{ color: color, ...textStyles }}
             {...props}
         >

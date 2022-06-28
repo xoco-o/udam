@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Components from "./screens/Components";
 import { RecoilRoot, useRecoilValue } from "recoil";
 import { userState } from "./utils/recoilAtoms";
-import LoginScreen from "./screens/Login";
+import GuestScreen from "./screens/Guest";
 
 export default function App() {
     return (
@@ -19,7 +19,7 @@ export default function App() {
 
 function UserProvider({ children }) {
     const user = useRecoilValue(userState);
-    if (!user) return <LoginScreen />;
+    if (!user) return <GuestScreen />;
     return children;
 }
 
