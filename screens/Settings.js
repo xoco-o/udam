@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Alert } from "react-native";
 import Box from "../components/Box";
 import colors from "../utils/colors";
 import MenuItem from "../components/MenuItem";
@@ -8,9 +8,25 @@ import s from "../utils/getRelativeSize";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import UserAvatar from "../components/UserAvatar";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import { userState } from "../utils/recoilAtoms";
+import { useSetRecoilState } from "recoil";
 
 export default function SettingsScreen() {
     const navigation = useNavigation();
+    const setUser = useSetRecoilState(userState);
+
+    function logout() {
+        Alert.alert("Гарах уу?", "", [
+            { text: "Болих", style: "cancel", onPress: () => {} },
+            {
+                text: "Гарах",
+                style: "destructive",
+                onPress: () => {
+                    setUser(null);
+                },
+            },
+        ]);
+    }
 
     return (
         <View style={{ flex: 1 }}>
@@ -47,7 +63,7 @@ export default function SettingsScreen() {
                     </Box>
 
                     <Box color={colors.white}>
-                        <MenuItem label="Гарах" icon={<MaterialCommunityIcons name="logout" size={s(20)} color={colors.red[400]} />} onPress={() => alert("onPress")} />
+                        <MenuItem label="Гарах" icon={<MaterialCommunityIcons name="logout" size={s(20)} color={colors.red[400]} />} onPress={logout} />
                     </Box>
                 </View>
             </ScrollView>
