@@ -1,5 +1,6 @@
 import { TouchableHighlight, Text, TouchableOpacity } from "react-native";
 import colors from "../utils/colors";
+import { primaryColor, secondaryColor } from "../utils/constants";
 import s from "../utils/getRelativeSize";
 import noop from "../utils/noop";
 
@@ -88,7 +89,7 @@ export function InlineTextButton({ children, color = colors.black, containerStyl
 
 export function PrimaryButton({ children, ...props }) {
     return (
-        <SolidButton color={colors.orange[400]} {...props}>
+        <SolidButton color={primaryColor} {...props}>
             {children}
         </SolidButton>
     );
@@ -96,7 +97,7 @@ export function PrimaryButton({ children, ...props }) {
 
 export function SecondaryButton({ children, ...props }) {
     return (
-        <SolidButton color={colors.blue[400]} {...props}>
+        <SolidButton color={secondaryColor} {...props}>
             {children}
         </SolidButton>
     );

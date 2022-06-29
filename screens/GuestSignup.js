@@ -35,7 +35,7 @@ export default function GuestSignupScreen() {
         setLoading(true);
         setTimeout(() => {
             setUser({});
-        }, 2000);
+        }, 1000);
     }
 
     return (
