@@ -27,35 +27,21 @@ export default function SettingsScreen() {
                             label="Мэдээлэл засах"
                             icon={<MaterialCommunityIcons name="account-edit-outline" size={s(20)} color={colors.orange[400]} />}
                             hasChevron
-                            onPress={() => alert("onPress")}
-                            onLongPress={() => alert("onLongPress")}
+                            onPress={() => alert("Тун удахгүй...")}
                         />
                     </Box>
 
                     <Box color={colors.white}>
-                        <MenuItem
-                            label="Холбоо барих"
-                            icon={<MaterialCommunityIcons name="phone-outline" size={s(20)} color={colors.blue[400]} />}
-                            hasChevron
-                            onPress={() => alert("onPress")}
-                            onLongPress={() => alert("onLongPress")}
-                        />
+                        <MenuItem label="Холбоо барих" icon={<MaterialCommunityIcons name="phone-outline" size={s(20)} color={colors.blue[400]} />} hasChevron onPress={() => alert("Тун удахгүй...")} />
                         <MenuBorder />
                         <MenuItem
                             label="Нууцлалын бодлого"
                             icon={<MaterialCommunityIcons name="shield-account-outline" size={s(20)} color={colors.blue[400]} />}
                             hasChevron
-                            onPress={() => alert("onPress")}
-                            onLongPress={() => alert("onLongPress")}
+                            onPress={() => alert("Тун удахгүй...")}
                         />
                         <MenuBorder />
-                        <MenuItem
-                            label="Үйлчилгээний нөхцөл"
-                            icon={<MaterialCommunityIcons name="playlist-check" size={s(20)} color={colors.blue[400]} />}
-                            hasChevron
-                            onPress={() => alert("onPress")}
-                            onLongPress={() => alert("onLongPress")}
-                        />
+                        <MenuItem label="Үйлчилгээний нөхцөл" icon={<MaterialCommunityIcons name="playlist-check" size={s(20)} color={colors.blue[400]} />} hasChevron onPress={() => alert("Тун удахгүй...")} />
                         <MenuBorder />
                         <MenuItem label="Аппын хувилбар" icon={<MaterialCommunityIcons name="information-outline" size={s(20)} color={colors.blue[400]} />} value="0.23.1" />
                     </Box>
