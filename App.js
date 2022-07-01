@@ -17,6 +17,7 @@ import BottomSheet from "./components/BottomSheet";
 import MenuItem from "./components/MenuItem";
 import { useState } from "react";
 import { FontAwesome5, EvilIcons } from "@expo/vector-icons";
+import AdScreen from "./screens/Ad";
 
 export default function App() {
     return (
@@ -72,7 +73,7 @@ function TabNavigator() {
             />
             <Tab.Screen
                 name="Ad"
-                component={InfoScreen}
+                component={AdScreen}
                 options={{
                     tabBarLabel: "Зар",
                     tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "megaphone" : "megaphone-outline"} color={color} size={size} />,
@@ -95,7 +96,7 @@ function TabNavigator() {
             />
             <Tab.Screen
                 name="Info"
-                component={View}
+                component={InfoScreen}
                 options={{
                     tabBarLabel: "Мэдээлэл",
                     tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "newspaper" : "newspaper-outline"} color={color} size={size - 3} />,
