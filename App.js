@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import Components from "./screens/Components";
-import { RecoilRoot, useRecoilValue } from "recoil";
-import { userState } from "./utils/recoilAtoms";
+import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { addSheetOpenState, userState } from "./utils/recoilAtoms";
 import GuestScreen from "./screens/Guest";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -12,6 +12,12 @@ import { primaryColor } from "./utils/constants";
 import MineScreen from "./screens/Mine";
 import InfoScreen from "./screens/Info";
 import SettingsScreen from "./screens/Settings";
+import { View } from "react-native";
+import BottomSheet from "./components/BottomSheet";
+import MenuItem from "./components/MenuItem";
+import { useState } from "react";
+import { FontAwesome5 } from "@expo/vector-icons";
+import MenuBorder from "./components/MenuBorder";
 
 export default function App() {
     return (
@@ -41,6 +47,7 @@ function Main() {
                 <Stack.Screen name="Components" component={Components} />
             </Stack.Navigator>
             <StatusBar style="dark" />
+            <AddSheet />
         </>
     );
 }
@@ -48,6 +55,8 @@ function Main() {
 const Tab = createBottomTabNavigator();
 
 function TabNavigator() {
+    const setAddSheetOpen = useSetRecoilState(addSheetOpenState);
+
     return (
         <Tab.Navigator
             screenOptions={{
@@ -71,10 +80,78 @@ function TabNavigator() {
                 }}
             />
             <Tab.Screen
+                name="Add"
+                component={View}
+                options={{
+                    tabBarLabel: "Нэмэх",
+                    tabBarIcon: ({ color, size }) => <Ionicons name="add-circle-outline" color={color} size={size} />,
+                }}
+                listeners={{
+                    tabPress: (e) => {
+                        e.preventDefault();
+                        setAddSheetOpen(true);
+                    },
+                }}
+            />
+            <Tab.Screen
                 name="Settings"
                 component={SettingsScreen}
                 options={{ tabBarLabel: "Тохиргоо", tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "settings" : "settings-outline"} color={color} size={size} /> }}
             />
         </Tab.Navigator>
+    );
+}
+
+function AddSheet() {
+    const [addSheetOpen, setAddSheetOpen] = useRecoilState(addSheetOpenState);
+    const [closeRequested, setCloseRequested] = useState(false);
+
+    function handleClose() {
+        setAddSheetOpen(false);
+        setCloseRequested(false);
+    }
+
+    function handleAddPress(action) {
+        console.log(action);
+        setCloseRequested(true);
+    }
+
+    const itemCount = 3;
+
+    return (
+        <BottomSheet open={addSheetOpen} onClose={handleClose} closeRequested={closeRequested} height={s(50 * itemCount) + 25}>
+            <View style={{ flex: 1 }}>
+                <MenuItem
+                    hasChevron
+                    icon={
+                        <View style={{ width: s(25) }}>
+                            <FontAwesome5 name="horse" size={s(16)} />
+                        </View>
+                    }
+                    label="Морь нэмэх"
+                    onPress={() => handleAddPress("qrcode")}
+                />
+                <MenuItem
+                    hasChevron
+                    icon={
+                        <View style={{ width: s(25) }}>
+                            <FontAwesome5 name="adversal" size={s(16)} />
+                        </View>
+                    }
+                    label="Зар нэмэх"
+                    onPress={() => handleAddPress("email")}
+                />
+                <MenuItem
+                    hasChevron
+                    icon={
+                        <View style={{ width: s(25) }}>
+                            <FontAwesome5 name="users" size={s(16)} />
+                        </View>
+                    }
+                    label="Гал нэмэх"
+                    onPress={() => handleAddPress("email")}
+                />
+            </View>
+        </BottomSheet>
     );
 }

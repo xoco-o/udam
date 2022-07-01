@@ -16,7 +16,7 @@ export default function MenuItem({ icon, label, onPress, onLongPress, underlayCo
 
                 {hasChevron && (
                     <View style={{ marginLeft: s(15) }}>
-                        <FontAwesome5 name="chevron-right" size={s(15)} color={colors.grey[300]} />
+                        <FontAwesome5 name="chevron-right" size={s(15)} color={colors.grey[400]} />
                     </View>
                 )}
             </View>
