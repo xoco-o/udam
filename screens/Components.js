@@ -12,10 +12,13 @@ import MenuBorder from "../components/MenuBorder";
 import { ScreenLoader, BlockLoader, ModalLoader } from "../components/Loaders";
 import ClassicModal from "../components/ClassicModal";
 import SelectField from "../components/SelectField";
+import { BaseTag, SolidTag } from "../components/Tags";
+import Tabs from "../components/Tabs";
 
 export default function Components() {
     const [checked, setChecked] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
+    const [tab, setTab] = useState("male");
 
     // return <ScreenLoader text="Уншиж байна" />;
 
@@ -23,6 +26,28 @@ export default function Components() {
         <View style={{ flex: 1, backgroundColor: colors.grey[100] }}>
             <ScrollView>
                 <View style={{ width: s(315), marginLeft: s(30), marginTop: s(50) }}>
+                    <Box title="Tabs" color={colors.white}>
+                        <View style={{ paddingVertical: s(15) }}>
+                            <Tabs
+                                value={tab}
+                                onChange={setTab}
+                                items={[
+                                    { value: "all", label: "Бүгд" },
+                                    { value: "male", label: "Эрэгтэй" },
+                                    { value: "female", label: "Эмэгтэй" },
+                                ]}
+                                containerStyles={{ paddingHorizontal: s(15) }}
+                            />
+                        </View>
+                    </Box>
+
+                    <Box title="Tags" color={colors.white}>
+                        <View style={{ padding: s(15), flexDirection: "row" }}>
+                            <BaseTag>Бүгд</BaseTag>
+                            <SolidTag>Бүгд</SolidTag>
+                        </View>
+                    </Box>
+
                     <Box title="Form elements" color={colors.white}>
                         <View style={{ padding: s(15) }}>
                             <TextField label="Name" help="Please enter your name" />

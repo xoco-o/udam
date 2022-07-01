@@ -16,8 +16,7 @@ import { View } from "react-native";
 import BottomSheet from "./components/BottomSheet";
 import MenuItem from "./components/MenuItem";
 import { useState } from "react";
-import { FontAwesome5 } from "@expo/vector-icons";
-import MenuBorder from "./components/MenuBorder";
+import { FontAwesome5, EvilIcons } from "@expo/vector-icons";
 
 export default function App() {
     return (
@@ -72,25 +71,34 @@ function TabNavigator() {
                 options={{ tabBarLabel: "Миний", tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "person-circle" : "person-circle-outline"} color={color} size={size} /> }}
             />
             <Tab.Screen
-                name="Info"
+                name="Ad"
                 component={InfoScreen}
                 options={{
-                    tabBarLabel: "Мэдээлэл",
-                    tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "information-circle" : "information-circle-outline"} color={color} size={size} />,
+                    tabBarLabel: "Зар",
+                    tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "megaphone" : "megaphone-outline"} color={color} size={size} />,
                 }}
             />
             <Tab.Screen
                 name="Add"
                 component={View}
                 options={{
-                    tabBarLabel: "Нэмэх",
-                    tabBarIcon: ({ color, size }) => <Ionicons name="add-circle-outline" color={color} size={size} />,
+                    tabBarLabel: "",
+                    tabBarIcon: ({ color, size }) => <EvilIcons name="plus" color={color} size={s(45)} />,
+                    tabBarLabelStyle: { display: "none" },
                 }}
                 listeners={{
                     tabPress: (e) => {
                         e.preventDefault();
                         setAddSheetOpen(true);
                     },
+                }}
+            />
+            <Tab.Screen
+                name="Info"
+                component={View}
+                options={{
+                    tabBarLabel: "Мэдээлэл",
+                    tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "newspaper" : "newspaper-outline"} color={color} size={size - 3} />,
                 }}
             />
             <Tab.Screen
