@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Image, Text } from "react-native";
 import { BaseButton, OutlinedButton, PrimaryButton, SecondaryButton, SolidButton, TextButton } from "../components/Buttons";
 import colors from "../utils/colors";
 import TextField from "../components/TextField";
@@ -14,6 +14,8 @@ import ClassicModal from "../components/ClassicModal";
 import SelectField from "../components/SelectField";
 import { BaseTag, SolidTag } from "../components/Tags";
 import Tabs from "../components/Tabs";
+import Card from "../components/Card";
+import lorem from "../utils/lorem";
 
 export default function Components() {
     const [checked, setChecked] = useState(false);
@@ -26,6 +28,15 @@ export default function Components() {
         <View style={{ flex: 1, backgroundColor: colors.grey[100] }}>
             <ScrollView>
                 <View style={{ width: s(315), marginLeft: s(30), marginTop: s(50) }}>
+                    <Card
+                        image={{ source: require("../assets/temp/walkthrough/wt-2.jpg"), width: s(315), height: s(200) }}
+                        title={lorem.generateWords(10)}
+                        description={lorem.generateWords(10)}
+                        tag="10,000,000₮"
+                        date="1 өдрийн өмнө"
+                    />
+                    <Card />
+
                     <Box title="Tabs" color={colors.white}>
                         <View style={{ paddingVertical: s(15) }}>
                             <Tabs
