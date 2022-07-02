@@ -10,7 +10,6 @@ import RelativeTime from "../components/RelativeTime";
 import BottomSheet from "../components/BottomSheet";
 import MenuItem from "../components/MenuItem";
 import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
-import MenuBorder from "../components/MenuBorder";
 
 const sampleTypes = [
     { value: "0", label: "Нийт (43)" },
