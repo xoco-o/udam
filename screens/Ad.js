@@ -10,58 +10,12 @@ import RelativeTime from "../components/RelativeTime";
 import BottomSheet from "../components/BottomSheet";
 import MenuItem from "../components/MenuItem";
 import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
-
-const sampleTypes = [
-    { value: "0", label: "Нийт (43)" },
-    { value: "1", label: "Азарга (13)" },
-    { value: "2", label: "Морь (10)" },
-    { value: "3", label: "Гүү (3)" },
-    { value: "4", label: "Хязаалан үрээ (7)" },
-    { value: "5", label: "Хязаалан байдас (0)" },
-    { value: "6", label: "Шүдлэн үрээ (9)" },
-    { value: "7", label: "Шүдлэн байдас (0)" },
-    { value: "8", label: "Эр даага (1)" },
-];
-
-const sampleAds = [
-    {
-        id: 1,
-        title: lorem.generateWords(10),
-        description: lorem.generateWords(10),
-        price: 10000000,
-        created: Date.now() - 1000000,
-        image: { source: require("../assets/temp/walkthrough/wt-1.jpg"), width: s(345), height: s(200) },
-    },
-    {
-        id: 2,
-        title: lorem.generateWords(10),
-        description: lorem.generateWords(10),
-        price: 23000000,
-        created: Date.now() - 20000000,
-        image: { source: require("../assets/temp/walkthrough/wt-2.jpg"), width: s(345), height: s(200) },
-    },
-    {
-        id: 3,
-        title: lorem.generateWords(10),
-        description: lorem.generateWords(10),
-        price: 15000000,
-        created: Date.now() - 400000000,
-        image: { source: require("../assets/temp/walkthrough/wt-3.jpg"), width: s(345), height: s(200) },
-    },
-    {
-        id: 4,
-        title: lorem.generateWords(10),
-        description: lorem.generateWords(10),
-        price: 5000000,
-        created: Date.now() - 3000000000,
-        image: { source: require("../assets/temp/walkthrough/wt-1.jpg"), width: s(345), height: s(200) },
-    },
-];
+import { ads, horseTypes } from "../utils/sampleData";
 
 export default function AdScreen() {
     const [typeId, setTypeId] = useState("0");
 
-    const renderItem = ({ item }) => <ListItem item={item} />;
+    const renderItem = ({ item }) => <AdItem item={item} />;
 
     return (
         <View style={{ flex: 1, backgroundColor: colors.white, paddingTop: getStatusBarHeight() }}>
@@ -69,10 +23,20 @@ export default function AdScreen() {
                 ListFooterComponent={<View style={{ height: s(100) }} />}
                 ListHeaderComponent={
                     <View style={{ paddingVertical: s(15) }}>
-                        <Tabs value={typeId} onChange={setTypeId} items={sampleTypes} containerStyles={{ paddingHorizontal: s(15) }} />
+                        <Tabs
+                            value={typeId}
+                            onChange={setTypeId}
+                            items={horseTypes.map((type) => {
+                                return {
+                                    label: `${type.name} (${type.count})`,
+                                    value: type.id,
+                                };
+                            })}
+                            containerStyles={{ paddingHorizontal: s(15) }}
+                        />
                     </View>
                 }
-                data={sampleAds}
+                data={ads}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
             />
@@ -80,7 +44,7 @@ export default function AdScreen() {
     );
 }
 
-function ListItem({ item }) {
+function AdItem({ item }) {
     const [open, setOpen] = useState(false);
     const [closeRequested, setCloseRequested] = useState(false);
 

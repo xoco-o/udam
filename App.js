@@ -18,6 +18,7 @@ import MenuItem from "./components/MenuItem";
 import { useState } from "react";
 import { FontAwesome5, EvilIcons } from "@expo/vector-icons";
 import AdScreen from "./screens/Ad";
+import HorsesScreen from "./screens/Horses";
 
 export default function App() {
     return (
@@ -45,6 +46,7 @@ function Main() {
             <Stack.Navigator>
                 <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
                 <Stack.Screen name="Components" component={Components} />
+                <Stack.Screen name="Horses" component={HorsesScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
             </Stack.Navigator>
             <StatusBar style="dark" />
             <AddSheet />
@@ -67,9 +69,12 @@ function TabNavigator() {
             }}
         >
             <Tab.Screen
-                name="Mine"
-                component={MineScreen}
-                options={{ tabBarLabel: "Миний", tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "person-circle" : "person-circle-outline"} color={color} size={size} /> }}
+                name="Info"
+                component={InfoScreen}
+                options={{
+                    tabBarLabel: "Мэдээлэл",
+                    tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "newspaper" : "newspaper-outline"} color={color} size={size - 3} />,
+                }}
             />
             <Tab.Screen
                 name="Ad"
@@ -95,12 +100,9 @@ function TabNavigator() {
                 }}
             />
             <Tab.Screen
-                name="Info"
-                component={InfoScreen}
-                options={{
-                    tabBarLabel: "Мэдээлэл",
-                    tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "newspaper" : "newspaper-outline"} color={color} size={size - 3} />,
-                }}
+                name="Mine"
+                component={MineScreen}
+                options={{ tabBarLabel: "Миний", tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "person-circle" : "person-circle-outline"} color={color} size={size} /> }}
             />
             <Tab.Screen
                 name="Settings"
