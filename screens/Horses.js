@@ -1,9 +1,11 @@
 import { View, FlatList } from "react-native";
 import s from "../utils/getRelativeSize";
 import ListItem from "../components/ListItem";
-import lorem from "../utils/lorem";
+import { SecondaryButton } from "../components/Buttons";
 import { useEffect } from "react";
 import { horses } from "../utils/sampleData";
+import { AntDesign } from "@expo/vector-icons";
+import colors from "../utils/colors";
 
 export default function HorsesScreen({ navigation, route }) {
     const { title } = route?.params;
@@ -15,8 +17,12 @@ export default function HorsesScreen({ navigation, route }) {
     const renderItem = ({ item }) => <HorseListItem item={item} />;
 
     return (
-        <View style={{ flex: 1, paddingVertical: s(10) }}>
-            <FlatList data={horses} renderItem={renderItem} keyExtractor={(item) => item.id} />
+        <View style={{ flex: 1 }}>
+            <FlatList data={horses} renderItem={renderItem} keyExtractor={(item) => item.id} ListFooterComponent={<View style={{ height: s(100) }} />} />
+
+            <View style={{ position: "absolute", bottom: s(25), right: s(15) }}>
+                <SecondaryButton containerStyles={{ height: s(60), width: s(60), borderRadius: s(30) }} icon={<AntDesign name="plus" size={s(20)} color={colors.white} />} />
+            </View>
         </View>
     );
 }

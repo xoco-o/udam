@@ -25,7 +25,7 @@ const initialTextStyles = {
     color: colors.black,
 };
 
-export function BaseButton({ disabled = false, children, onPress = noop, onLongPress = noop, underlayColor, Touchable = TouchableOpacity, containerStyles = {}, textStyles = {} }) {
+export function BaseButton({ icon, disabled = false, children, onPress = noop, onLongPress = noop, underlayColor, Touchable = TouchableOpacity, containerStyles = {}, textStyles = {} }) {
     return (
         <Touchable
             onPress={disabled ? noop : onPress}
@@ -38,9 +38,12 @@ export function BaseButton({ disabled = false, children, onPress = noop, onLongP
                 opacity: disabled ? 0.5 : 1,
             }}
         >
-            <Text numberOfLines={1} style={{ ...initialTextStyles, ...textStyles }}>
-                {children}
-            </Text>
+            {icon && <>{icon}</>}
+            {children && (
+                <Text numberOfLines={1} style={{ ...initialTextStyles, ...textStyles }}>
+                    {children}
+                </Text>
+            )}
         </Touchable>
     );
 }

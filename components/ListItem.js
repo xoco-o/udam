@@ -11,9 +11,8 @@ export default function ListItem({ image, title, subtitle, underlayColor = color
             onLongPress={onLongPress}
             style={{
                 backgroundColor: colors.white,
-
                 marginHorizontal: s(10),
-                marginBottom: s(10),
+                marginTop: s(10),
                 padding: s(10),
                 shadowColor: "#000",
                 shadowOffset: {
@@ -22,7 +21,6 @@ export default function ListItem({ image, title, subtitle, underlayColor = color
                 },
                 shadowOpacity: 0.18,
                 shadowRadius: 1.0,
-
                 elevation: 1,
             }}
         >

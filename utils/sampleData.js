@@ -20,14 +20,6 @@ export const horseTypes = [
 
 export const ads = [
     {
-        id: 1,
-        title: lorem.generateWords(10),
-        description: lorem.generateWords(10),
-        price: 10000000,
-        created: Date.now() - 1000000,
-        image: { source: require("../assets/sample/1.jpg"), width: s(345), height: s(200) },
-    },
-    {
         id: 2,
         title: lorem.generateWords(10),
         description: lorem.generateWords(10),
@@ -50,6 +42,14 @@ export const ads = [
         price: 5000000,
         created: Date.now() - 3000000000,
         image: { source: require("../assets/sample/4.jpg"), width: s(345), height: s(200) },
+    },
+    {
+        id: 1,
+        title: lorem.generateWords(10),
+        description: lorem.generateWords(10),
+        price: 10000000,
+        created: Date.now() - 1000000,
+        image: { source: require("../assets/sample/1.jpg"), width: s(345), height: s(200) },
     },
 ];
 
@@ -77,5 +77,17 @@ export const horses = [
         title: lorem.generateWords(5),
         subtitle: lorem.generateWords(5),
         image: { source: require("../assets/sample/1.jpg") },
+    },
+    {
+        id: 5,
+        title: lorem.generateWords(5),
+        subtitle: lorem.generateWords(5),
+        image: { source: require("../assets/sample/4.jpg") },
+    },
+    {
+        id: 6,
+        title: lorem.generateWords(5),
+        subtitle: lorem.generateWords(5),
+        image: { source: require("../assets/sample/3.jpg") },
     },
 ];
