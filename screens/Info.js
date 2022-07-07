@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Box from "../components/Box";
 import colors from "../utils/colors";
 
-export default function InfoScreen() {
+export default function InfoScreen({ navigation }) {
     return (
         <View style={{ flex: 1, paddingTop: getStatusBarHeight() }}>
             <ScrollView>
@@ -24,7 +24,7 @@ export default function InfoScreen() {
                         />
                     </Box>
                     <Box color={colors.white}>
-                        <MenuItem label="Цуваа" icon={<MaterialCommunityIcons name="flag-checkered" size={s(20)} color={colors.grey[600]} />} hasChevron onPress={() => alert("Тун удахгүй...")} />
+                        <MenuItem label="Цуваа" icon={<MaterialCommunityIcons name="flag-checkered" size={s(20)} color={colors.grey[600]} />} hasChevron onPress={() => navigation.navigate("Races")} />
                     </Box>
                     <Box color={colors.white}>
                         <MenuItem label="Төрийн түмэн эхүүд" icon={<MaterialCommunityIcons name="medal-outline" size={s(20)} color={colors.orange[400]} />} hasChevron onPress={() => alert("Тун удахгүй...")} />

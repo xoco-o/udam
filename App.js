@@ -19,6 +19,7 @@ import { useState } from "react";
 import { FontAwesome5, EvilIcons } from "@expo/vector-icons";
 import AdScreen from "./screens/Ad";
 import HorsesScreen from "./screens/Horses";
+import RacesScreen from "./screens/Races";
 
 export default function App() {
     return (
@@ -47,6 +48,7 @@ function Main() {
                 <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
                 <Stack.Screen name="Components" component={Components} />
                 <Stack.Screen name="Horses" component={HorsesScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
+                <Stack.Screen name="Races" component={RacesScreen} options={{ headerBackTitle: "", headerTitle: "Уралдаанууд" }} />
             </Stack.Navigator>
             <StatusBar style="dark" />
             <AddSheet />
