@@ -29,7 +29,7 @@ export default function Components() {
             <ScrollView>
                 <View style={{ width: s(315), marginLeft: s(30), marginTop: s(50) }}>
                     <Card
-                        image={{ source: require("../assets/temp/walkthrough/wt-2.jpg"), width: s(315), height: s(200) }}
+                        image={{ source: require("../assets/sample/1.jpg"), width: s(315), height: s(200) }}
                         title={lorem.generateWords(10)}
                         description={lorem.generateWords(10)}
                         tag="10,000,000₮"

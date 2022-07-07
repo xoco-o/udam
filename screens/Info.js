@@ -12,7 +12,7 @@ export default function InfoScreen() {
             <ScrollView>
                 <View style={{ margin: s(15) }}>
                     <Box color={colors.white}>
-                        <Image source={require("../assets/temp/banner/banner-1.jpg")} style={{ width: 345, height: 200, resizeMode: "cover" }} />
+                        <Image source={require("../assets/sample/1.jpg")} style={{ width: 345, height: 200, resizeMode: "cover" }} />
                     </Box>
 
                     <Box color={colors.white}>

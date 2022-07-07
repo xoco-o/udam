@@ -35,19 +35,19 @@ export default function GuestHomeScreen() {
 const sampleList = [
     {
         id: 1,
-        image: require("../assets/temp/walkthrough/wt-1.jpg"),
+        image: require("../assets/sample/2.jpg"),
         name: lorem.generateWords(3),
         description: lorem.generateWords(20),
     },
     {
         id: 2,
-        image: require("../assets/temp/walkthrough/wt-2.jpg"),
+        image: require("../assets/sample/3.jpg"),
         name: lorem.generateWords(3),
         description: lorem.generateWords(15),
     },
     {
         id: 3,
-        image: require("../assets/temp/walkthrough/wt-3.jpg"),
+        image: require("../assets/sample/4.jpg"),
         name: lorem.generateWords(4),
         description: lorem.generateWords(20),
     },

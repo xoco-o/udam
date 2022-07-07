@@ -18,7 +18,7 @@ export default function MineScreen() {
                     <Box color={colors.white}>
                         {horseTypes.map((type, index) => (
                             <View key={type.id}>
-                                <MenuItem label={`${type.name} (${type.count})`} hasChevron onPress={() => navigation.navigate("Horses")} />
+                                <MenuItem label={`${type.name} (${type.count})`} hasChevron onPress={() => navigation.navigate("Horses", { title: `${type.name} (${type.count})` })} />
                                 {horseTypes.length - 1 > index && <MenuBorder />}
                             </View>
                         ))}

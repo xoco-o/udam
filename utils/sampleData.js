@@ -25,7 +25,7 @@ export const ads = [
         description: lorem.generateWords(10),
         price: 10000000,
         created: Date.now() - 1000000,
-        image: { source: require("../assets/temp/walkthrough/wt-1.jpg"), width: s(345), height: s(200) },
+        image: { source: require("../assets/sample/1.jpg"), width: s(345), height: s(200) },
     },
     {
         id: 2,
@@ -33,7 +33,7 @@ export const ads = [
         description: lorem.generateWords(10),
         price: 23000000,
         created: Date.now() - 20000000,
-        image: { source: require("../assets/temp/walkthrough/wt-2.jpg"), width: s(345), height: s(200) },
+        image: { source: require("../assets/sample/2.jpg"), width: s(345), height: s(200) },
     },
     {
         id: 3,
@@ -41,7 +41,7 @@ export const ads = [
         description: lorem.generateWords(10),
         price: 15000000,
         created: Date.now() - 400000000,
-        image: { source: require("../assets/temp/walkthrough/wt-3.jpg"), width: s(345), height: s(200) },
+        image: { source: require("../assets/sample/3.jpg"), width: s(345), height: s(200) },
     },
     {
         id: 4,
@@ -49,6 +49,33 @@ export const ads = [
         description: lorem.generateWords(10),
         price: 5000000,
         created: Date.now() - 3000000000,
-        image: { source: require("../assets/temp/walkthrough/wt-1.jpg"), width: s(345), height: s(200) },
+        image: { source: require("../assets/sample/4.jpg"), width: s(345), height: s(200) },
+    },
+];
+
+export const horses = [
+    {
+        id: 1,
+        title: lorem.generateWords(5),
+        subtitle: lorem.generateWords(5),
+        image: { source: require("../assets/sample/4.jpg") },
+    },
+    {
+        id: 2,
+        title: lorem.generateWords(5),
+        subtitle: lorem.generateWords(5),
+        image: { source: require("../assets/sample/3.jpg") },
+    },
+    {
+        id: 3,
+        title: lorem.generateWords(5),
+        subtitle: lorem.generateWords(5),
+        image: { source: require("../assets/sample/2.jpg") },
+    },
+    {
+        id: 4,
+        title: lorem.generateWords(5),
+        subtitle: lorem.generateWords(5),
+        image: { source: require("../assets/sample/1.jpg") },
     },
 ];
