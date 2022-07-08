@@ -6,7 +6,6 @@ import { raceTypes, raceWinners } from "../utils/sampleData";
 import Tabs from "../components/Tabs";
 import colors from "../utils/colors";
 import UserAvatar from "../components/UserAvatar";
-import lorem from "../utils/lorem";
 
 export default function RaceWinnersScreen({ navigation, route }) {
     const { title } = route?.params;

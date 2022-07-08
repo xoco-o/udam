@@ -215,3 +215,76 @@ export const articles = [
         image: { source: require("../assets/sample/3.jpg") },
     },
 ];
+
+export const ranks = [
+    { id: "1", name: "Азарга" },
+    { id: "2", name: "Их нас" },
+    { id: "3", name: "Сонгомол дээд" },
+];
+
+export const rankedHorses = [
+    {
+        id: 1,
+        gold: 3,
+        silver: 2,
+        bronze: 4,
+        title: lorem.generateWords(3),
+        image: { source: require("../assets/sample/4.jpg") },
+    },
+    {
+        id: 2,
+        gold: 2,
+        silver: 2,
+        bronze: 4,
+        title: lorem.generateWords(3),
+        image: { source: require("../assets/sample/3.jpg") },
+    },
+    {
+        id: 3,
+        gold: 0,
+        silver: 2,
+        bronze: 4,
+        title: lorem.generateWords(3),
+        image: { source: require("../assets/sample/2.jpg") },
+    },
+    {
+        id: 4,
+        gold: 1,
+        silver: 0,
+        bronze: 4,
+        title: lorem.generateWords(3),
+        image: { source: require("../assets/sample/1.jpg") },
+    },
+    {
+        id: 5,
+        gold: 0,
+        silver: 1,
+        bronze: 4,
+        title: lorem.generateWords(3),
+        image: { source: require("../assets/sample/4.jpg") },
+    },
+    {
+        id: 6,
+        gold: 0,
+        silver: 1,
+        bronze: 2,
+        title: lorem.generateWords(3),
+        image: { source: require("../assets/sample/3.jpg") },
+    },
+    {
+        id: 7,
+        gold: 0,
+        silver: 0,
+        bronze: 4,
+        title: lorem.generateWords(3),
+        image: { source: require("../assets/sample/4.jpg") },
+    },
+    {
+        id: 8,
+        gold: 0,
+        silver: 0,
+        bronze: 2,
+        title: lorem.generateWords(3),
+        image: { source: require("../assets/sample/3.jpg") },
+    },
+];

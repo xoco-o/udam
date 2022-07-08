@@ -27,7 +27,12 @@ export default function InfoScreen({ navigation }) {
                         <MenuItem label="Цуваа" icon={<MaterialCommunityIcons name="flag-checkered" size={s(20)} color={colors.grey[600]} />} hasChevron onPress={() => navigation.navigate("Races")} />
                     </Box>
                     <Box color={colors.white}>
-                        <MenuItem label="Төрийн түмэн эхүүд" icon={<MaterialCommunityIcons name="medal-outline" size={s(20)} color={colors.orange[400]} />} hasChevron onPress={() => alert("Тун удахгүй...")} />
+                        <MenuItem
+                            label="Төрийн түмэн эхүүд"
+                            icon={<MaterialCommunityIcons name="medal-outline" size={s(20)} color={colors.orange[400]} />}
+                            hasChevron
+                            onPress={() => navigation.navigate("Ranks")}
+                        />
                     </Box>
                     <Box color={colors.white}>
                         <MenuItem label="Галууд" icon={<MaterialCommunityIcons name="account-group-outline" size={s(20)} color={colors.green[400]} />} hasChevron onPress={() => alert("Тун удахгүй...")} />

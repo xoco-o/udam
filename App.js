@@ -23,6 +23,8 @@ import RaceYearsScreen from "./screens/RaceYears";
 import RaceWinnersScreen from "./screens/RaceWinners";
 import AdsScreen from "./screens/Ads";
 import ArticlesScreen from "./screens/Articles";
+import RanksScreen from "./screens/Ranks";
+import RankedHorsesScreen from "./screens/RankedHorses";
 
 export default function App() {
     return (
@@ -55,6 +57,8 @@ function Main() {
                 <Stack.Screen name="RaceYears" component={RaceYearsScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
                 <Stack.Screen name="RaceWinners" component={RaceWinnersScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
                 <Stack.Screen name="Articles" component={ArticlesScreen} options={{ headerBackTitle: "", headerTitle: "Мэдээ" }} />
+                <Stack.Screen name="Ranks" component={RanksScreen} options={{ headerBackTitle: "", headerTitle: "Төрийн түмэн эхүүд" }} />
+                <Stack.Screen name="RankedHorses" component={RankedHorsesScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
             </Stack.Navigator>
             <StatusBar style="dark" />
             <AddSheet />
