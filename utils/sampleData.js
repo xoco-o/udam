@@ -277,7 +277,7 @@ export const rankedHorses = [
         silver: 0,
         bronze: 4,
         title: lorem.generateWords(3),
-        image: { source: require("../assets/sample/4.jpg") },
+        // image: { source: require("../assets/sample/4.jpg") },
     },
     {
         id: 8,
@@ -287,4 +287,14 @@ export const rankedHorses = [
         title: lorem.generateWords(3),
         image: { source: require("../assets/sample/3.jpg") },
     },
+];
+
+export const teams = [
+    { id: 1, name: "Босоо хээр", image: { source: require("../assets/sample/4.jpg") } },
+    { id: 2, name: "Унаган адуу", image: { source: require("../assets/sample/3.jpg") } },
+    { id: 3, name: "Бөхөн хүлэг гал", image: { source: require("../assets/sample/2.jpg") } },
+    { id: 4, name: "Хушаат хурд", image: { source: require("../assets/sample/1.jpg") } },
+    { id: 5, name: "Оргиоч", image: { source: require("../assets/sample/4.jpg") } },
+    { id: 6, name: "Түмний эх", image: { source: require("../assets/sample/3.jpg") } },
+    { id: 7, name: "Ажнай хишиг", image: { source: require("../assets/sample/2.jpg") } },
 ];

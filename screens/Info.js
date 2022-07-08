@@ -35,7 +35,7 @@ export default function InfoScreen({ navigation }) {
                         />
                     </Box>
                     <Box color={colors.white}>
-                        <MenuItem label="Галууд" icon={<MaterialCommunityIcons name="account-group-outline" size={s(20)} color={colors.green[400]} />} hasChevron onPress={() => alert("Тун удахгүй...")} />
+                        <MenuItem label="Галууд" icon={<MaterialCommunityIcons name="account-group-outline" size={s(20)} color={colors.green[400]} />} hasChevron onPress={() => navigation.navigate("Teams")} />
                     </Box>
                     <Box color={colors.white}>
                         <MenuItem label="Бичлэг" icon={<MaterialCommunityIcons name="video-outline" size={s(20)} color={colors.red[400]} />} hasChevron onPress={() => alert("Тун удахгүй...")} />

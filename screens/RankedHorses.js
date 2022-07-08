@@ -26,7 +26,7 @@ function RankedHorseItem({ item, index }) {
     return (
         <ListItem
             title={`${index + 1}. ${item.title}`}
-            image={{ source: item.image.source, width: s(120), height: s(67.5) }}
+            image={{ source: item.image?.source, width: s(120), height: s(67.5) }}
             imageChild={
                 <View style={{ position: "absolute", top: s(5), left: s(5), flexDirection: "row" }}>
                     <Medals color="orange" count={item.gold} />

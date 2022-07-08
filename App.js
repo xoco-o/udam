@@ -25,6 +25,7 @@ import AdsScreen from "./screens/Ads";
 import ArticlesScreen from "./screens/Articles";
 import RanksScreen from "./screens/Ranks";
 import RankedHorsesScreen from "./screens/RankedHorses";
+import TeamsScreen from "./screens/Teams";
 
 export default function App() {
     return (
@@ -59,6 +60,7 @@ function Main() {
                 <Stack.Screen name="Articles" component={ArticlesScreen} options={{ headerBackTitle: "", headerTitle: "Мэдээ" }} />
                 <Stack.Screen name="Ranks" component={RanksScreen} options={{ headerBackTitle: "", headerTitle: "Төрийн түмэн эхүүд" }} />
                 <Stack.Screen name="RankedHorses" component={RankedHorsesScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
+                <Stack.Screen name="Teams" component={TeamsScreen} options={{ headerBackTitle: "", headerTitle: "Галууд" }} />
             </Stack.Navigator>
             <StatusBar style="dark" />
             <AddSheet />
