@@ -12,7 +12,7 @@ import MenuItem from "../components/MenuItem";
 import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
 import { ads, horseTypes } from "../utils/sampleData";
 
-export default function AdScreen() {
+export default function AdsScreen() {
     const [typeId, setTypeId] = useState("0");
 
     const renderItem = ({ item }) => <AdItem item={item} />;

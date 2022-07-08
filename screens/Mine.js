@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import { View, ScrollView } from "react-native";
 import s from "../utils/getRelativeSize";
 import { getStatusBarHeight } from "react-native-status-bar-height";
@@ -8,9 +7,7 @@ import MenuBorder from "../components/MenuBorder";
 import colors from "../utils/colors";
 import { horseTypes } from "../utils/sampleData";
 
-export default function MineScreen() {
-    const navigation = useNavigation();
-
+export default function MineScreen({ navigation }) {
     return (
         <View style={{ flex: 1, paddingTop: getStatusBarHeight() }}>
             <ScrollView>

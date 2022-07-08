@@ -17,9 +17,12 @@ import BottomSheet from "./components/BottomSheet";
 import MenuItem from "./components/MenuItem";
 import { useState } from "react";
 import { FontAwesome5, EvilIcons } from "@expo/vector-icons";
-import AdScreen from "./screens/Ad";
 import HorsesScreen from "./screens/Horses";
 import RacesScreen from "./screens/Races";
+import RaceYearsScreen from "./screens/RaceYears";
+import RaceWinnersScreen from "./screens/RaceWinners";
+import AdsScreen from "./screens/Ads";
+import ArticlesScreen from "./screens/Articles";
 
 export default function App() {
     return (
@@ -49,6 +52,9 @@ function Main() {
                 <Stack.Screen name="Components" component={Components} />
                 <Stack.Screen name="Horses" component={HorsesScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
                 <Stack.Screen name="Races" component={RacesScreen} options={{ headerBackTitle: "", headerTitle: "Уралдаанууд" }} />
+                <Stack.Screen name="RaceYears" component={RaceYearsScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
+                <Stack.Screen name="RaceWinners" component={RaceWinnersScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
+                <Stack.Screen name="Articles" component={ArticlesScreen} options={{ headerBackTitle: "", headerTitle: "Мэдээ" }} />
             </Stack.Navigator>
             <StatusBar style="dark" />
             <AddSheet />
@@ -79,8 +85,8 @@ function TabNavigator() {
                 }}
             />
             <Tab.Screen
-                name="Ad"
-                component={AdScreen}
+                name="Ads"
+                component={AdsScreen}
                 options={{
                     tabBarLabel: "Зар",
                     tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "megaphone" : "megaphone-outline"} color={color} size={size} />,

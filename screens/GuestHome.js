@@ -5,11 +5,8 @@ import s, { designWidth } from "../utils/getRelativeSize";
 import { useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import lorem from "../utils/lorem";
-import { useNavigation } from "@react-navigation/native";
 
-export default function GuestHomeScreen() {
-    const navigation = useNavigation();
-
+export default function GuestHomeScreen({ navigation }) {
     return (
         <View style={{ flex: 1, backgroundColor: colors.grey[900] }}>
             <View style={{ flex: 1 }}>

@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import { View, Text, ScrollView, Alert } from "react-native";
 import Box from "../components/Box";
 import colors from "../utils/colors";
@@ -12,7 +11,6 @@ import { userState } from "../utils/recoilAtoms";
 import { useSetRecoilState } from "recoil";
 
 export default function SettingsScreen() {
-    const navigation = useNavigation();
     const setUser = useSetRecoilState(userState);
 
     function logout() {

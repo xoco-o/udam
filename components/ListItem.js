@@ -1,9 +1,9 @@
-import { View, Text, Image, TouchableHighlight } from "react-native";
+import { View, Text, ImageBackground, TouchableHighlight } from "react-native";
 import s from "../utils/getRelativeSize";
 import colors from "../utils/colors";
 import noop from "../utils/noop";
 
-export default function ListItem({ image, title, subtitle, underlayColor = colors.grey[100], onPress = noop, onLongPress = noop, children }) {
+export default function ListItem({ image, title, subtitle, underlayColor = colors.grey[100], onPress = noop, onLongPress = noop, rootChild, imageChild, textChild }) {
     return (
         <TouchableHighlight
             underlayColor={underlayColor}
@@ -27,7 +27,9 @@ export default function ListItem({ image, title, subtitle, underlayColor = color
             <View style={{ flexDirection: "row", alignItems: "center" }}>
                 {image && (
                     <>
-                        <Image source={image.source} style={{ width: image.width, height: image.height, resizeMode: "cover" }} />
+                        <ImageBackground source={image.source} style={{ width: image.width, height: image.height, resizeMode: "cover" }}>
+                            {imageChild}
+                        </ImageBackground>
                     </>
                 )}
 
@@ -43,8 +45,10 @@ export default function ListItem({ image, title, subtitle, underlayColor = color
                         </>
                     )}
 
-                    {children}
+                    {textChild}
                 </View>
+
+                {rootChild}
             </View>
         </TouchableHighlight>
     );

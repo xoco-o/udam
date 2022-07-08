@@ -6,19 +6,16 @@ import s from "../utils/getRelativeSize";
 import { InlineTextButton, PrimaryButton } from "../components/Buttons";
 import { useState } from "react";
 import { ModalLoader } from "../components/Loaders";
-import { useNavigation } from "@react-navigation/native";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../utils/recoilAtoms";
 
-export default function GuestLoginScreen() {
+export default function GuestLoginScreen({ navigation }) {
     const setUser = useSetRecoilState(userState);
 
     const [loginname, setLoginname] = useState("");
     const [password, setPassword] = useState("");
 
     const [loading, setLoading] = useState(false);
-
-    const navigation = useNavigation();
 
     function submit() {
         setLoading(true);

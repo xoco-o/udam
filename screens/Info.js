@@ -20,7 +20,7 @@ export default function InfoScreen({ navigation }) {
                             label="Мэдээ, нийтлэл"
                             icon={<MaterialCommunityIcons name="newspaper-variant-outline" size={s(20)} color={colors.blue[600]} />}
                             hasChevron
-                            onPress={() => alert("Тун удахгүй...")}
+                            onPress={() => navigation.navigate("Articles")}
                         />
                     </Box>
                     <Box color={colors.white}>
