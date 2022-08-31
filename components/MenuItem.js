@@ -10,7 +10,7 @@ export default function MenuItem({ icon, label, onPress, onLongPress, underlayCo
             <View style={{ flexDirection: "row", alignItems: "center", paddingVertical: s(15), paddingHorizontal: s(20) }}>
                 {icon && <View style={{ marginRight: s(20) }}>{icon}</View>}
 
-                <Text style={{ fontSize: s(16), fontSize: s(16), flex: 1 }}>{label}</Text>
+                <Text style={{fontSize: s(16), flex: 1 }}>{label}</Text>
 
                 {!!value && <Text style={{ fontSize: s(13), color: colors.grey[400] }}>{value}</Text>}
 
