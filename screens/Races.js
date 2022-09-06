@@ -29,10 +29,11 @@ export default function RacesScreen({ navigation }) {
                             races ?
                             races.map((race, index) => (
                             <View key={race.id}>
-                                <MenuItem label={race.name} hasChevron onPress={() => navigation.navigate("RaceYears", { title: race.name })} />
+                                <MenuItem label={race.name} hasChevron onPress={() => navigation.navigate("RaceYears", { title: race.name, id: race.id })} />
                                 {races.length - 1 > index && <MenuBorder />}
                             </View>
                         )):<></>
+
                         }
                     </Box>
                 </View>

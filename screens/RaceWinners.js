@@ -2,18 +2,38 @@ import { View, ScrollView, Text } from "react-native";
 import s from "../utils/getRelativeSize";
 import ListItem from "../components/ListItem";
 import { useEffect, useState } from "react";
-import { raceTypes, raceWinners } from "../utils/sampleData";
+// import { raceTypes, raceWinners } from "../utils/sampleData";
 import Tabs from "../components/Tabs";
 import colors from "../utils/colors";
 import UserAvatar from "../components/UserAvatar";
+import API from "../utils/API";
+import urls from "../utils/urls";
 
 export default function RaceWinnersScreen({ navigation, route }) {
-    const { title } = route?.params;
-    const [typeId, setTypeId] = useState(1);
+    const { title, id } = route?.params;
+    const [typeId, setTypeId] = useState();
+    const [raceTypes, setRaceTypes] = useState();
+    const [raceWinners, setRaceWinners] = useState();
+    const [bool, setBool] = useState(false);
 
     useEffect(() => {
+        API.get('festival/'+id+'/horseTournament', (res) => {
+            if (res.success) {
+                setRaceTypes(res.payload);
+                setTypeId(res.payload[0].id)
+                setBool(true);
+                // console.log('res.payload[0].id',res.payload[0].id)
+            }
+        });
         navigation.setOptions({ headerTitle: title });
     }, []);
+    useEffect(() => {
+        API.get('horseTournament/'+typeId+'/reward', (res) => {
+            if (res.success) {
+                setRaceWinners(res.payload);
+            }
+        });
+    }, [typeId]);
 
     return (
         <View style={{ flex: 1 }}>
@@ -32,23 +52,31 @@ export default function RaceWinnersScreen({ navigation, route }) {
                     zIndex: 1,
                 }}
             >
-                <Tabs
-                    value={typeId}
-                    onChange={setTypeId}
-                    items={raceTypes.map((type) => {
-                        return {
-                            label: type.name,
-                            value: type.id,
-                        };
-                    })}
-                    containerStyles={{ paddingHorizontal: s(15) }}
-                />
+                {
+                    bool?
+                        <Tabs
+                            value={typeId}
+                            onChange={setTypeId}
+                            items={
+                                raceTypes.map((type) => {
+                                    return {
+                                        label: type.horseAge,
+                                        value: type.id,
+                                    };
+                                })
+                            }
+                            containerStyles={{ paddingHorizontal: s(15) }}
+                        /> : <Text style={{ margin: 20, fontSize: 16, color: '#ccc'}}>Хоосон байна.</Text>
+                }
             </View>
 
             <ScrollView>
-                {raceWinners.map((winner) => (
+                {
+                    raceWinners?
+                    raceWinners.map((winner) => (
                     <WinnerItem item={winner} key={winner.id} />
-                ))}
+                )):<></>
+                }
                 <View style={{ height: s(100) }} />
             </ScrollView>
         </View>
@@ -56,12 +84,12 @@ export default function RaceWinnersScreen({ navigation, route }) {
 }
 
 function WinnerItem({ item }) {
-    let winnerColor = "grey";
+    let winnerColor = "deepOrange";
 
-    if (item.position === 1) {
+    if (item.name === 'Түрүү магнай') {
         winnerColor = "orange";
-    } else if (item.position === 2) {
-        winnerColor = "teal";
+    } else if (item.name === 'Аман хүзүү') {
+        winnerColor = "grey";
     } else if (item.position < 6) {
         winnerColor = "deepOrange";
     }
@@ -69,7 +97,7 @@ function WinnerItem({ item }) {
     return (
         <ListItem
             title={item.title}
-            image={{ source: item.image.source, width: s(120), height: s(67.5) }}
+            image={{ source: item.image.name +'_s.'+ item.image.ext, width: s(120), height: s(67.5) }}
             imageChild={
                 <View
                     style={{
