@@ -1,7 +1,6 @@
 import { View, FlatList, Text } from "react-native";
 import s from "../utils/getRelativeSize";
 import ListItem from "../components/ListItem";
-// import { articles } from "../utils/sampleData";
 import RelativeTime from "../components/RelativeTime";
 import {useEffect, useState} from "react";
 import API from "../utils/API";

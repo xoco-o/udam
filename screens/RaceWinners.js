@@ -2,12 +2,10 @@ import { View, ScrollView, Text } from "react-native";
 import s from "../utils/getRelativeSize";
 import ListItem from "../components/ListItem";
 import { useEffect, useState } from "react";
-// import { raceTypes, raceWinners } from "../utils/sampleData";
 import Tabs from "../components/Tabs";
 import colors from "../utils/colors";
 import UserAvatar from "../components/UserAvatar";
 import API from "../utils/API";
-import urls from "../utils/urls";
 
 export default function RaceWinnersScreen({ navigation, route }) {
     const { title, id } = route?.params;

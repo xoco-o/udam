@@ -1,7 +1,6 @@
 import { View, ScrollView } from "react-native";
 import s from "../utils/getRelativeSize";
 import ListItem from "../components/ListItem";
-import { teams } from "../utils/sampleData";
 import {useEffect, useState} from "react";
 import API from "../utils/API";
 
