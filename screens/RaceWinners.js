@@ -97,7 +97,7 @@ function WinnerItem({ item }) {
     return (
         <ListItem
             title={item.horse.name}
-            image={{ source: item.image.name +'_s.'+ item.image.ext, width: s(120), height: s(67.5) }}
+            image={{ source: typeof item.image !== 'undefined' ? item.image.name +'_s.'+ item.image.ext : 'no-image', width: s(120), height: s(67.5) }}
             imageChild={
                 <View
                     style={{

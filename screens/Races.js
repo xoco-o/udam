@@ -10,13 +10,11 @@ import API from "../utils/API";
 
 export default function RacesScreen({ navigation }) {
     const [races, setRaces] = useState();
-    const [bool, setBool] = useState(false);
 
     useEffect(() => {
         API.get("festival/category", (res) => {
             if (res.success) {
                 setRaces(res.payload);
-                setBool(true);
             }
         });
     }, []);

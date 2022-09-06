@@ -28,7 +28,7 @@ export default function ListItem({ image, title, subtitle, underlayColor = color
             <View style={{ flexDirection: "row", alignItems: "center" }}>
                 {image && (
                     <>
-                        <ImageBackground source={{ uri: urls.resource + image.source}} style={{ backgroundColor: colors.grey[300], width: image.width, height: image.height, resizeMode: "cover" }}>
+                        <ImageBackground source={image.source!=='no-image' ? { uri: urls.resource + image.source} : require('../assets/no-image.png')} style={{ backgroundColor: colors.grey[300], width: image.width, height: image.height, resizeMode: "cover" }}>
                             {imageChild}
                         </ImageBackground>
                     </>
