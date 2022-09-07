@@ -1,6 +1,6 @@
 import { EvilIcons, FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
@@ -11,6 +11,8 @@ import MenuItem from "./components/MenuItem";
 import AdsScreen from "./screens/Ads";
 import ArticlesScreen from "./screens/Articles";
 import Components from "./screens/Components";
+import CreateAdScreen from "./screens/CreateAd";
+import CreateHorseScreen from "./screens/CreateHorse";
 import GuestScreen from "./screens/Guest";
 import HorsesScreen from "./screens/Horses";
 import InfoScreen from "./screens/Info";
@@ -68,6 +70,8 @@ function Main() {
                     component={OneTeamsScreen}
                     options={({ route }) => ({ headerBackTitle: "", headerTitle: route.params.club.name })}
                 />
+                <Stack.Screen name="CreateAd" component={CreateAdScreen} options={{ headerBackTitle: "", headerTitle: "Зар нэмэх" }} />
+                <Stack.Screen name="CreateHorse" component={CreateHorseScreen} options={{ headerBackTitle: "", headerTitle: "Адуу нэмэх" }} />
             </Stack.Navigator>
             <StatusBar style="dark" />
             <AddSheet />
@@ -143,14 +147,25 @@ function TabNavigator() {
 function AddSheet() {
     const [addSheetOpen, setAddSheetOpen] = useRecoilState(addSheetOpenState);
     const [closeRequested, setCloseRequested] = useState(false);
+    const navigation = useNavigation();
 
     function handleClose() {
         setAddSheetOpen(false);
         setCloseRequested(false);
     }
 
-    function handleAddPress(action) {
-        console.log(action);
+    function handleAddPress(name) {
+        switch (name) {
+            case "horse":
+                navigation.navigate("CreateHorse");
+                break;
+            case "ad":
+                navigation.navigate("CreateAd");
+                break;
+            case "club":
+                break;
+        }
+
         setCloseRequested(true);
     }
 
@@ -167,7 +182,7 @@ function AddSheet() {
                         </View>
                     }
                     label="Морь нэмэх"
-                    onPress={() => handleAddPress("qrcode")}
+                    onPress={() => handleAddPress("horse")}
                 />
                 <MenuItem
                     hasChevron
@@ -177,7 +192,7 @@ function AddSheet() {
                         </View>
                     }
                     label="Зар нэмэх"
-                    onPress={() => handleAddPress("email")}
+                    onPress={() => handleAddPress("ad")}
                 />
                 <MenuItem
                     hasChevron
@@ -187,7 +202,7 @@ function AddSheet() {
                         </View>
                     }
                     label="Гал нэмэх"
-                    onPress={() => handleAddPress("email")}
+                    onPress={() => handleAddPress("club")}
                 />
             </View>
         </BottomSheet>
