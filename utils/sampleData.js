@@ -1,5 +1,5 @@
-import lorem from "./lorem";
 import s from "./getRelativeSize";
+import lorem from "./lorem";
 
 export const horseTypes = [
     { id: "0", name: "Нийт", count: 51 },
@@ -297,4 +297,10 @@ export const teams = [
     { id: 5, name: "Оргиоч", image: { source: require("../assets/sample/4.jpg") } },
     { id: 6, name: "Түмний эх", image: { source: require("../assets/sample/3.jpg") } },
     { id: 7, name: "Ажнай хишиг", image: { source: require("../assets/sample/2.jpg") } },
+];
+
+export const users = [
+    { id: 1, name: "О. Батхуяг", description: "Тод манлай", image: { source: require("../assets/sample/4.jpg") } },
+    { id: 2, name: "У. Наганадуу", description: "Тод манлай", image: { source: require("../assets/sample/3.jpg") } },
+    { id: 3, name: "Б. Ахөнхүлэг", description: "Тод манлай", image: { source: require("../assets/sample/2.jpg") } },
 ];

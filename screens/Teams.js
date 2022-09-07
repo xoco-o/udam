@@ -1,8 +1,9 @@
-import { View, ScrollView } from "react-native";
-import s from "../utils/getRelativeSize";
+import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { ScrollView, View } from "react-native";
 import ListItem from "../components/ListItem";
-import {useEffect, useState} from "react";
 import API from "../utils/API";
+import s from "../utils/getRelativeSize";
 
 export default function TeamsScreen() {
     const [club, setClub] = useState();
@@ -18,12 +19,7 @@ export default function TeamsScreen() {
     return (
         <View style={{ flex: 1 }}>
             <ScrollView>
-                {
-                    club?
-                    club.map((team) => (
-                    <TeamItem item={team} key={team.id} />
-                )):<></>
-                }
+                {club ? club.map((team) => <TeamItem item={team} key={team.id} />) : <></>}
                 <View style={{ height: s(100) }} />
             </ScrollView>
         </View>
@@ -31,5 +27,13 @@ export default function TeamsScreen() {
 }
 
 function TeamItem({ item }) {
-    return <ListItem title={item.name} image={{ source: typeof item.image !== 'undefined' ? item.image.name +'_s.'+ item.image.ext : 'no-image', width: s(70), height: s(70) }} />;
+    const navigation = useNavigation();
+
+    return (
+        <ListItem
+            title={item.name}
+            image={{ source: typeof item.image !== "undefined" ? item.image.name + "_s." + item.image.ext : "no-image", width: s(70), height: s(70) }}
+            onPress={() => navigation.navigate("OneTeam", { club: item })}
+        />
+    );
 }

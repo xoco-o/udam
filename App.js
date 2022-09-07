@@ -16,6 +16,7 @@ import HorsesScreen from "./screens/Horses";
 import InfoScreen from "./screens/Info";
 import MineScreen from "./screens/Mine";
 import OneArticleScreen from "./screens/OneArticle";
+import OneTeamsScreen from "./screens/OneTeam";
 import RacesScreen from "./screens/Races";
 import RaceWinnersScreen from "./screens/RaceWinners";
 import RaceYearsScreen from "./screens/RaceYears";
@@ -62,6 +63,11 @@ function Main() {
                 <Stack.Screen name="Ranks" component={RanksScreen} options={{ headerBackTitle: "", headerTitle: "Төрийн түмэн эхүүд" }} />
                 <Stack.Screen name="RankedHorses" component={RankedHorsesScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
                 <Stack.Screen name="Teams" component={TeamsScreen} options={{ headerBackTitle: "", headerTitle: "Галууд" }} />
+                <Stack.Screen
+                    name="OneTeam"
+                    component={OneTeamsScreen}
+                    options={({ route }) => ({ headerBackTitle: "", headerTitle: route.params.club.name })}
+                />
             </Stack.Navigator>
             <StatusBar style="dark" />
             <AddSheet />
