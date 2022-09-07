@@ -1,31 +1,31 @@
-import { StatusBar } from "expo-status-bar";
-import { NavigationContainer } from "@react-navigation/native";
-import Components from "./screens/Components";
-import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { addSheetOpenState, userState } from "./utils/recoilAtoms";
-import GuestScreen from "./screens/Guest";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { EvilIcons, FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
-import s from "./utils/getRelativeSize";
-import { primaryColor } from "./utils/constants";
-import MineScreen from "./screens/Mine";
-import InfoScreen from "./screens/Info";
-import SettingsScreen from "./screens/Settings";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
 import { View } from "react-native";
+import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import BottomSheet from "./components/BottomSheet";
 import MenuItem from "./components/MenuItem";
-import { useState } from "react";
-import { FontAwesome5, EvilIcons } from "@expo/vector-icons";
-import HorsesScreen from "./screens/Horses";
-import RacesScreen from "./screens/Races";
-import RaceYearsScreen from "./screens/RaceYears";
-import RaceWinnersScreen from "./screens/RaceWinners";
 import AdsScreen from "./screens/Ads";
 import ArticlesScreen from "./screens/Articles";
-import RanksScreen from "./screens/Ranks";
+import Components from "./screens/Components";
+import GuestScreen from "./screens/Guest";
+import HorsesScreen from "./screens/Horses";
+import InfoScreen from "./screens/Info";
+import MineScreen from "./screens/Mine";
+import OneArticleScreen from "./screens/OneArticle";
+import RacesScreen from "./screens/Races";
+import RaceWinnersScreen from "./screens/RaceWinners";
+import RaceYearsScreen from "./screens/RaceYears";
 import RankedHorsesScreen from "./screens/RankedHorses";
+import RanksScreen from "./screens/Ranks";
+import SettingsScreen from "./screens/Settings";
 import TeamsScreen from "./screens/Teams";
+import { primaryColor } from "./utils/constants";
+import s from "./utils/getRelativeSize";
+import { addSheetOpenState, userState } from "./utils/recoilAtoms";
 
 export default function App() {
     return (
@@ -57,7 +57,8 @@ function Main() {
                 <Stack.Screen name="Races" component={RacesScreen} options={{ headerBackTitle: "", headerTitle: "Уралдаанууд" }} />
                 <Stack.Screen name="RaceYears" component={RaceYearsScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
                 <Stack.Screen name="RaceWinners" component={RaceWinnersScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
-                <Stack.Screen name="Articles" component={ArticlesScreen} options={{ headerBackTitle: "", headerTitle: "Мэдээ" }} />
+                <Stack.Screen name="Articles" component={ArticlesScreen} options={{ headerBackTitle: "", headerTitle: "Мэдээ, нийтлэл" }} />
+                <Stack.Screen name="OneArticle" component={OneArticleScreen} options={{ headerBackTitle: "", headerTitle: "Мэдээ" }} />
                 <Stack.Screen name="Ranks" component={RanksScreen} options={{ headerBackTitle: "", headerTitle: "Төрийн түмэн эхүүд" }} />
                 <Stack.Screen name="RankedHorses" component={RankedHorsesScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
                 <Stack.Screen name="Teams" component={TeamsScreen} options={{ headerBackTitle: "", headerTitle: "Галууд" }} />
@@ -116,12 +117,18 @@ function TabNavigator() {
             <Tab.Screen
                 name="Mine"
                 component={MineScreen}
-                options={{ tabBarLabel: "Миний", tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "person-circle" : "person-circle-outline"} color={color} size={size} /> }}
+                options={{
+                    tabBarLabel: "Миний",
+                    tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "person-circle" : "person-circle-outline"} color={color} size={size} />,
+                }}
             />
             <Tab.Screen
                 name="Settings"
                 component={SettingsScreen}
-                options={{ tabBarLabel: "Тохиргоо", tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "settings" : "settings-outline"} color={color} size={size} /> }}
+                options={{
+                    tabBarLabel: "Тохиргоо",
+                    tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "settings" : "settings-outline"} color={color} size={size} />,
+                }}
             />
         </Tab.Navigator>
     );
