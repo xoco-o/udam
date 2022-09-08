@@ -56,13 +56,16 @@ export default function GuestLoginScreen({ navigation }) {
                     console.log("catch:  error signin " + err);
                     setUser(null);
                     // alert(err);
+                    setLoading(false);
                 });
 
             } else {
                 alert("Нэвтрэх нэр нууц үгээ дахин шалгаад оролдоно уу.");
+                setLoading(false);
             }
         }).catch((err) => {
             alert("catch:  " + err);
+            setLoading(false);
         });
 
 

@@ -10,6 +10,8 @@ import Checkbox from "../components/Checkbox";
 import { ModalLoader } from "../components/Loaders";
 import { userState } from "../utils/recoilAtoms";
 import { useSetRecoilState, useRecoilValue } from "recoil";
+import urls from "../utils/urls";
+import {useNavigation} from "@react-navigation/native";
 
 export default function GuestSignupScreen() {
     const setUser = useSetRecoilState(userState);
@@ -22,10 +24,12 @@ export default function GuestSignupScreen() {
 
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
+    const em = email? {email: email}:{};
+    const form = {loginname:loginname, phone:phone, em, pword:password, rpword:passwordConfirm,givenname:givenname,surename:surname }
 
     const [acceptedTerms, setAcceptedTerms] = useState(false);
-
     const [loading, setLoading] = useState(false);
+    const navigation = useNavigation();
 
     function submit() {
         if (!acceptedTerms) {
@@ -33,9 +37,39 @@ export default function GuestSignupScreen() {
             return;
         }
         setLoading(true);
-        setTimeout(() => {
-            setUser({});
-        }, 1000);
+        fetch(urls.api +'core/signup', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: form ? JSON.stringify(form) : "",
+            credentials: "include",
+        }).then((response) => {
+            if ( response.status === 200 ) {
+                return null;
+            }else{
+                return response.json();
+            }
+        }).then((responseJson) => {
+            if (responseJson === null){
+                Alert.alert('', 'Амжилттай бүртгүүллээ', [
+                        {
+                            text: 'Нэвтрэх', onPress: () => {
+                                navigation.navigate('GuestLoginScreen');
+                            }
+                        }
+                    ],
+                    { cancelable: true }
+                );
+            }else {
+                Alert.alert('', responseJson.errors[0].defaultMessage,'',{ cancelable: true })
+                setLoading(false);
+            }
+        }).catch((err) => {
+            console.error(err);
+            setLoading(false);
+        });
     }
 
     return (
@@ -60,9 +94,7 @@ export default function GuestSignupScreen() {
                     </View>
                 </View>
             </KeyboardAwareScrollView>
-
             {loading && <ModalLoader text="Уншиж байна" />}
-
             <StatusBar style="dark" />
         </View>
     );
