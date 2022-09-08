@@ -8,10 +8,11 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import UserAvatar from "../components/UserAvatar";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { userState } from "../utils/recoilAtoms";
-import { useSetRecoilState } from "recoil";
+import {useRecoilState, useSetRecoilState,} from "recoil";
 
 export default function SettingsScreen() {
-    const setUser = useSetRecoilState(userState);
+    const [user,setUser] = useRecoilState(userState);
+    // const [givenName, loginName] = useSetRecoilState(userState);
 
     function logout() {
         Alert.alert("Гарах уу?", "", [
@@ -32,8 +33,8 @@ export default function SettingsScreen() {
                 <View style={{ marginHorizontal: s(10) }}>
                     <View style={{ alignItems: "center", marginVertical: s(30) }}>
                         <UserAvatar size={s(100)} />
-                        <Text style={{ fontSize: s(16), marginTop: s(10) }}>Эрдэнэцогт Амгаланбаатар</Text>
-                        <Text style={{ fontSize: s(12), marginTop: s(5), color: colors.grey[600] }}>a.erdenetsogt@gmail.com</Text>
+                        <Text style={{ fontSize: s(16), marginTop: s(10) }}>{user.givenName!==undefined? user.givenName : user.loginName!==undefined?user.loginName:''}</Text>
+                        <Text style={{ fontSize: s(12), marginTop: s(5), color: colors.grey[600] }}>{user.email !== undefined ? user.email:''}</Text>
                     </View>
 
                     <Box color={colors.white}>

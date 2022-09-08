@@ -1,7 +1,7 @@
 const urls = {
-    baseURL: 'http://udam.sport.sodonsolution.org/',
-    api: 'http://udam.sport.sodonsolution.org/api/',
-    resource: 'http://udam.sport.sodonsolution.org/resource/',
+    baseURL: 'http://udam.sodonsolution.org/',
+    api: 'http://udam.sodonsolution.org/api/',
+    resource: 'http://udam.sodonsolution.org/resource/',
 };
 
 export default urls;

@@ -6,29 +6,73 @@ import s from "../utils/getRelativeSize";
 import { InlineTextButton, PrimaryButton } from "../components/Buttons";
 import { useState } from "react";
 import { ModalLoader } from "../components/Loaders";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { userState } from "../utils/recoilAtoms";
+import urls from "../utils/urls";
 
 export default function GuestLoginScreen({ navigation }) {
-    const setUser = useSetRecoilState(userState);
+    const [user,setUser] = useRecoilState(userState);
 
-    const [loginname, setLoginname] = useState("");
+    const [loginName, setLoginName] = useState("");
     const [password, setPassword] = useState("");
 
     const [loading, setLoading] = useState(false);
 
-    function submit() {
+    const submit = async () => {
         setLoading(true);
-        setTimeout(() => {
-            setUser({});
-        }, 1000);
-    }
+        const params = {
+            'loginname': loginName,
+            'password': password,
+        };
+
+        fetch(urls.api + `core/signin`, {
+            method: "POST", credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(params),
+        }).then((response) => {
+            if (response.status === 200) {
+                fetch(urls.api + 'core/signedUser', {  method: 'GET', credentials: 'include',
+                    headers: {
+                        Accept: 'application/json',
+                        "Content-Type": "application/json",
+                    }
+                }).then((response2) => {
+                    if ( response2.status === 200 ) {
+                        return response2.json();
+                    }
+                    return null;
+                }).then((responseJson) => {
+                    if(responseJson!==null){
+                        setUser({
+                            loginName: responseJson.loginname,
+                            givenName: responseJson.givenname,
+                            email: responseJson.email,
+                        });
+                    }
+                }).catch((err) => {
+                    console.log("catch:  error signin " + err);
+                    setUser(null);
+                    // alert(err);
+                });
+
+            } else {
+                alert("Нэвтрэх нэр нууц үгээ дахин шалгаад оролдоно уу.");
+            }
+        }).catch((err) => {
+            alert("catch:  " + err);
+        });
+
+
+    };
 
     return (
         <View style={{ flex: 1, backgroundColor: colors.white }}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                 <View style={{ paddingVertical: s(25), paddingHorizontal: s(20), flex: 1 }}>
-                    <TextField placeholder="Нэвтрэх нэр" autoCapitalize="none" value={loginname} onChangeText={setLoginname} />
+                    <TextField placeholder="Нэвтрэх нэр" autoCapitalize="none" value={loginName} onChangeText={setLoginName} />
                     <TextField placeholder="Нууц үг" secureTextEntry={true} autoCapitalize="none" value={password} onChangeText={setPassword} />
 
                     <PrimaryButton onPress={submit}>Нэвтрэх</PrimaryButton>
@@ -39,9 +83,7 @@ export default function GuestLoginScreen({ navigation }) {
                     </View>
                 </View>
             </TouchableWithoutFeedback>
-
             {loading && <ModalLoader text="Уншиж байна" />}
-
             <StatusBar style="dark" />
         </View>
     );

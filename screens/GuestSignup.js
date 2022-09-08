@@ -9,7 +9,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Checkbox from "../components/Checkbox";
 import { ModalLoader } from "../components/Loaders";
 import { userState } from "../utils/recoilAtoms";
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 
 export default function GuestSignupScreen() {
     const setUser = useSetRecoilState(userState);
