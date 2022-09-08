@@ -13,7 +13,7 @@ import { useSetRecoilState, useRecoilValue } from "recoil";
 import urls from "../utils/urls";
 import {useNavigation} from "@react-navigation/native";
 
-export default function GuestSignupScreen() {
+export default function GuestSignupScreen({ navigation }) {
     const setUser = useSetRecoilState(userState);
 
     const [loginname, setLoginname] = useState("");
@@ -29,7 +29,6 @@ export default function GuestSignupScreen() {
 
     const [acceptedTerms, setAcceptedTerms] = useState(false);
     const [loading, setLoading] = useState(false);
-    const navigation = useNavigation();
 
     function submit() {
         if (!acceptedTerms) {
@@ -56,7 +55,7 @@ export default function GuestSignupScreen() {
                 Alert.alert('', 'Амжилттай бүртгүүллээ', [
                         {
                             text: 'Нэвтрэх', onPress: () => {
-                                navigation.navigate('GuestLoginScreen');
+                                navigation.navigate('GuestLogin');
                             }
                         }
                     ],

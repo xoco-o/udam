@@ -48,7 +48,7 @@ export default function GuestLoginScreen({ navigation }) {
                     if(responseJson!==null){
                         setUser({
                             loginName: responseJson.loginname,
-                            givenName: responseJson.givenname,
+                            givenName: responseJson.givenname!==""?responseJson.givenname:undefined,
                             email: responseJson.email,
                         });
                     }
