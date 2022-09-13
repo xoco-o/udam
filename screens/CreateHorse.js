@@ -53,7 +53,7 @@ export default function CreateHorseScreen() {
         };
         // console.log('form)',JSON.stringify(form));
         // setLoading(true);
-        fetch(urls.api + `/client/horse/create`, {
+        fetch(urls.api + `client/horse/create`, {
             method: "POST", credentials: 'include',
             headers: {
                 'Accept': 'application/json',
@@ -61,7 +61,12 @@ export default function CreateHorseScreen() {
             },
             body: form? JSON.stringify(form) : "",
         }).then((response) => {
-            alert('response error: ', response.text());
+            // alert('response error: ', response.text());
+            // console.log('response createHorse', response.text());
+            // setLoading(true);
+            return response.json();
+        }).then((responseJson) => {
+            alert('response error: ', responseJson.text());
             // console.log('response createHorse', response.text());
             // setLoading(true);
         }).catch((err) => {
