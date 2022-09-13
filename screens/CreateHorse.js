@@ -51,7 +51,7 @@ export default function CreateHorseScreen() {
             "gender": gender,
             "horseAge" : age
         };
-        console.log('form)',JSON.stringify(form));
+        // console.log('form)',JSON.stringify(form));
         // setLoading(true);
         fetch(urls.api + `/client/horse/create`, {
             method: "POST", credentials: 'include',
@@ -61,7 +61,7 @@ export default function CreateHorseScreen() {
             },
             body: form? JSON.stringify(form) : "",
         }).then((response) => {
-            console.log('response createHorse', response.status);
+            alert('response error: ', response.text());
             // console.log('response createHorse', response.text());
             // setLoading(true);
         }).catch((err) => {
