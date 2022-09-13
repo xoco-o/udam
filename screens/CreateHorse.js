@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { Image, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { OutlinedButton, PrimaryButton } from "../components/Buttons";
@@ -12,13 +12,16 @@ import s from "../utils/getRelativeSize";
 import * as ImagePicker from "expo-image-picker";
 import Checkbox from "../components/Checkbox";
 import SelectField from "../components/SelectField";
-import TrainerPicker from "../components/TrainerPicker";
+import urls from "../utils/urls";
+import { useRecoilValue} from "recoil";
+import {userState} from "../utils/recoilAtoms";
 
 export default function CreateHorseScreen() {
+    const user = useRecoilValue(userState);
     const [image, setImage] = useState(null);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [owner, setOwner] = useState("");
+    const [color, setColor] = useState("");
     const [gender, setGender] = useState("");
     const [age, setAge] = useState("");
     const [isMine, setIsMine] = useState(true);
@@ -30,19 +33,46 @@ export default function CreateHorseScreen() {
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             quality: 1,
         });
-
         console.log(result);
-
         if (!result.cancelled) {
             setImage(result.uri);
         }
     }
 
+    /*useEffect(()=>{
+
+    },[])*/
+
     function submit() {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
+        const form = {
+            // user: user.id,
+            "name": name,
+            "color": color,
+            "gender": gender,
+            "horseAge" : age
+        };
+        console.log('form)',JSON.stringify(form));
+        // setLoading(true);
+        fetch(urls.api + `/client/horse/create`, {
+            method: "POST", credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                "Content-Type": "application/json",
+            },
+            body: form? JSON.stringify(form) : "",
+        }).then((response) => {
+            console.log('response createHorse', response.status);
+            // console.log('response createHorse', response.text());
+            // setLoading(true);
+        }).catch((err) => {
+            alert("catch:  " + err);
+            // setLoading(false);
+            console.log('response createHorse', response.json());
+        });
+
+        // setTimeout(() => {
+        //     setLoading(false);
+        // }, 1000);
     }
 
     return (
@@ -65,17 +95,21 @@ export default function CreateHorseScreen() {
                     </FormField>
 
                     <TextField label="Нэр" value={name} onChangeText={setName} />
-                    <TextField label="Тайлбар" multiline value={description} onChangeText={setDescription} />
+                    <TextField label="Зүс" value={color} onChangeText={setColor} />
+                    {/*<TextField label="Тайлбар" multiline value={description} onChangeText={setDescription} />*/}
 
-                    <TrainerPicker value={owner} onChange={setOwner} label="Эзэн" placeholder="Сонгоно уу" />
+                    {/*<TrainerPicker value={owner} onChange={setOwner} label="Эзэн" placeholder="Сонгоно уу" />*/}
 
                     <SelectField
                         value={gender}
                         onChange={setGender}
                         items={[
-                            { value: "azarga", label: "Азарга" },
-                            { value: "mori", label: "Морь" },
-                            { value: "guu", label: "Гүү" },
+                            // { value: "Азарга", label: "Азарга" },
+                            // { value: "Морь", label: "Морь" },
+                            // { value: "Гүү", label: "Гүү" },
+                            { value: "FEMALE", label: "Гүү" },
+                            { value: "MALE", label: "Морь" },
+                            { value: "OTHER", label: "Азарга" },
                         ]}
                         label="Хүйс"
                         placeholder="Сонгоно уу"
@@ -85,9 +119,12 @@ export default function CreateHorseScreen() {
                         value={age}
                         onChange={setAge}
                         items={[
-                            { value: "unaga", label: "Унага" },
-                            { value: "daaga", label: "Даага" },
-                            { value: "shudlen", label: "Шүдлэн" },
+                            // { value: "Унага", label: "Унага" },
+                            { value: "DAAGA", label: "Даага" },
+                            { value: "SHUDLEN", label: "Шүдлэн" },
+                            { value: "HYAZAALAN", label: "Хязаалан" },
+                            { value: "SOYOLON", label: "Соёолон" },
+                            { value: "IKHNAS", label: "Их нас" },
                         ]}
                         label="Нас"
                         placeholder="Сонгоно уу"
@@ -108,7 +145,6 @@ export default function CreateHorseScreen() {
             </KeyboardAwareScrollView>
 
             {loading && <ModalLoader text="Уншиж байна" />}
-
             <StatusBar style="dark" />
         </View>
     );
