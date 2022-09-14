@@ -9,9 +9,9 @@ import { ModalLoader } from "../components/Loaders";
 import TextField from "../components/TextField";
 import colors from "../utils/colors";
 import s from "../utils/getRelativeSize";
+import urls from "../utils/urls";
 
 export default function CreateAdScreen() {
-    const [horse, setHorse] = useState("");
     const [phone, setPhone] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
@@ -20,22 +20,44 @@ export default function CreateAdScreen() {
 
     const [loading, setLoading] = useState(false);
 
+    const adForm = {
+        "categoryId": "1",
+        "text" : description,
+        "phoneOne": phone,
+        "price": price
+    };
+
     function submit() {
         if (!acceptedTerms) {
             Alert.alert("Анхаар", "Үйлчилгээний нөхцлийг зөвшөөрнө үү!");
-            return;
+            return null;
+        } else {
+            // setLoading(true);
+            fetch(urls.api + `client/ad/creates`, {
+                method: "POST", credentials: 'include',
+                headers: {
+                    'Accept': 'application/json',
+                    "Content-Type": "application/json",
+                },
+                body: adForm? JSON.stringify(adForm) : "",
+            }).then((response) => {
+                if(response.status===200){
+                    return response.json();
+                } else alert(response.status);
+                return null;
+            }).then((data) => {
+                alert(data.text)
+            }).catch((err) => {
+                alert("catch:  " + err);
+            });
         }
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
     }
 
     return (
         <View style={{ flex: 1, backgroundColor: colors.white }}>
             <KeyboardAwareScrollView>
                 <View style={{ paddingVertical: s(25), paddingHorizontal: s(20), flex: 1 }}>
-                    <HorsePicker value={horse} onChange={setHorse} label="Морь" placeholder="Сонгоно уу" />
+                    {/*<HorsePicker value={horse} onChange={setHorse} label="Морь" placeholder="Сонгоно уу" />*/}
 
                     <TextField label="Утас" value={phone} onChangeText={setPhone} keyboardType="numeric" textContentType="telephoneNumber" />
 
@@ -52,9 +74,7 @@ export default function CreateAdScreen() {
                     </View>
                 </View>
             </KeyboardAwareScrollView>
-
             {loading && <ModalLoader text="Уншиж байна" />}
-
             <StatusBar style="dark" />
         </View>
     );

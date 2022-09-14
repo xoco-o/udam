@@ -13,14 +13,10 @@ import * as ImagePicker from "expo-image-picker";
 import Checkbox from "../components/Checkbox";
 import SelectField from "../components/SelectField";
 import urls from "../utils/urls";
-import { useRecoilValue} from "recoil";
-import {userState} from "../utils/recoilAtoms";
 
 export default function CreateHorseScreen() {
-    const user = useRecoilValue(userState);
     const [image, setImage] = useState(null);
     const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
     const [color, setColor] = useState("");
     const [gender, setGender] = useState("");
     const [age, setAge] = useState("");
@@ -39,10 +35,6 @@ export default function CreateHorseScreen() {
         }
     }
 
-    /*useEffect(()=>{
-
-    },[])*/
-
     function submit() {
         const form = {
             // user: user.id,
@@ -51,8 +43,6 @@ export default function CreateHorseScreen() {
             "gender": gender,
             "horseAge" : age
         };
-        // console.log('form)',JSON.stringify(form));
-        // setLoading(true);
         fetch(urls.api + `client/horse/create`, {
             method: "POST", credentials: 'include',
             headers: {
@@ -61,23 +51,15 @@ export default function CreateHorseScreen() {
             },
             body: form? JSON.stringify(form) : "",
         }).then((response) => {
-            // alert('response error: ', response.text());
-            // console.log('response createHorse', response.text());
-            // setLoading(true);
-            return response.json();
-        }).then((responseJson) => {
-            alert('response error: ', responseJson.text());
-            // console.log('response createHorse', response.text());
-            // setLoading(true);
+            if(response.status===200){
+                return response.json();
+            } else alert(response.status);
+            return null;
+        }).then((data) => {
+            alert(data.text)
         }).catch((err) => {
             alert("catch:  " + err);
-            // setLoading(false);
-            console.log('response createHorse', response.json());
         });
-
-        // setTimeout(() => {
-        //     setLoading(false);
-        // }, 1000);
     }
 
     return (
@@ -94,32 +76,22 @@ export default function CreateHorseScreen() {
                             />
                         </View>
                     )}
-
                     <FormField>
                         <OutlinedButton onPress={pickImage}>Зураг сонгох</OutlinedButton>
                     </FormField>
-
                     <TextField label="Нэр" value={name} onChangeText={setName} />
                     <TextField label="Зүс" value={color} onChangeText={setColor} />
-                    {/*<TextField label="Тайлбар" multiline value={description} onChangeText={setDescription} />*/}
-
-                    {/*<TrainerPicker value={owner} onChange={setOwner} label="Эзэн" placeholder="Сонгоно уу" />*/}
-
                     <SelectField
                         value={gender}
                         onChange={setGender}
                         items={[
-                            // { value: "Азарга", label: "Азарга" },
-                            // { value: "Морь", label: "Морь" },
-                            // { value: "Гүү", label: "Гүү" },
-                            { value: "FEMALE", label: "Гүү" },
-                            { value: "MALE", label: "Морь" },
-                            { value: "OTHER", label: "Азарга" },
+                            { value: "FEMALE", label: "Эм" },
+                            { value: "MALE", label: "Эр" },
+                            { value: "OTHER", label: "Зассан" },
                         ]}
                         label="Хүйс"
                         placeholder="Сонгоно уу"
                     />
-
                     <SelectField
                         value={age}
                         onChange={setAge}
@@ -134,21 +106,17 @@ export default function CreateHorseScreen() {
                         label="Нас"
                         placeholder="Сонгоно уу"
                     />
-
                     <FormField>
                         <Checkbox label="Минийх" value={isMine} onValueChange={setIsMine} />
                     </FormField>
-
                     <FormField>
                         <Checkbox label="Бусдад харагдах" value={isPublic} onValueChange={setIsPublic} />
                     </FormField>
-
                     <View style={{ marginVertical: s(20) }}>
                         <PrimaryButton onPress={submit}>Илгээх</PrimaryButton>
                     </View>
                 </View>
             </KeyboardAwareScrollView>
-
             {loading && <ModalLoader text="Уншиж байна" />}
             <StatusBar style="dark" />
         </View>

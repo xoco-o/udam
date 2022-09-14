@@ -47,7 +47,6 @@ export default function GuestLoginScreen({ navigation }) {
                 }).then((responseJson) => {
                     if(responseJson!==null){
                         setUser({
-                            id: responseJson.id,
                             loginName: responseJson.loginname,
                             givenName: responseJson.givenname!==""?responseJson.givenname:undefined,
                             email: responseJson.email,
@@ -76,9 +75,7 @@ export default function GuestLoginScreen({ navigation }) {
                 <View style={{ paddingVertical: s(25), paddingHorizontal: s(20), flex: 1 }}>
                     <TextField placeholder="Нэвтрэх нэр" autoCapitalize="none" value={loginName} onChangeText={setLoginName} />
                     <TextField placeholder="Нууц үг" secureTextEntry={true} autoCapitalize="none" value={password} onChangeText={setPassword} />
-
                     <PrimaryButton onPress={submit}>Нэвтрэх</PrimaryButton>
-
                     <View style={{ flex: 1, alignItems: "flex-end", flexDirection: "row", justifyContent: "space-between", marginTop: s(20) }}>
                         <InlineTextButton>Нууц үг мартсан</InlineTextButton>
                         <InlineTextButton onPress={() => navigation.navigate("GuestSignup")}>Бүртгүүлэх</InlineTextButton>
