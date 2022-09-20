@@ -13,9 +13,9 @@ export default function SelectField({ label, placeholder, help, items, value, on
 
     const selectedItem = items.find((item) => item.value === value);
 
-    let selectedLabel = placeholder;
+    let selectedName = placeholder;
     if (selectedItem) {
-        selectedLabel = selectedItem.label;
+        selectedName = selectedItem.name;
     }
 
     return (
@@ -42,7 +42,7 @@ export default function SelectField({ label, placeholder, help, items, value, on
                             flex: 1,
                         }}
                     >
-                        {selectedLabel}
+                        {selectedName}
                     </Text>
                     <FontAwesome5 name="chevron-down" size={s(16)} />
                 </View>
@@ -54,7 +54,7 @@ export default function SelectField({ label, placeholder, help, items, value, on
                     {items.map((item) => (
                         <MenuItem
                             key={item.value}
-                            label={item.label}
+                            label={item.name}
                             onPress={() => {
                                 setOpen(false);
                                 onChange(item.value);

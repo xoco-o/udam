@@ -69,8 +69,8 @@ export default function Components() {
                                 value="male"
                                 onChange={(val) => alert(val)}
                                 items={[
-                                    { value: "female", label: "Female" },
-                                    { value: "male", label: "Male" },
+                                    { value: "female", name: "Female" },
+                                    { value: "male", name: "Male" },
                                 ]}
                                 label="Select"
                                 placeholder="Please select your gender"

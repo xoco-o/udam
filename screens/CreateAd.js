@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Alert, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { PrimaryButton } from "../components/Buttons";
@@ -10,18 +10,31 @@ import TextField from "../components/TextField";
 import colors from "../utils/colors";
 import s from "../utils/getRelativeSize";
 import urls from "../utils/urls";
+import SelectField from "../components/SelectField";
+import API from "../utils/API";
+import MenuItem from "../components/MenuItem";
 
 export default function CreateAdScreen() {
     const [phone, setPhone] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
+    const [category, setCategory] = useState("");
+    const [data, setData] = useState("");
 
     const [acceptedTerms, setAcceptedTerms] = useState(false);
 
     const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
+        API.get("ad/category/list", (res) => {
+            if (res.success) {
+                setData(res.payload);
+            }
+        });
+    }, []);
+
     const adForm = {
-        "categoryId": "1",
+        "categoryId": category,
         "text" : description,
         "phoneOne": phone,
         "price": price
@@ -57,8 +70,16 @@ export default function CreateAdScreen() {
         <View style={{ flex: 1, backgroundColor: colors.white }}>
             <KeyboardAwareScrollView>
                 <View style={{ paddingVertical: s(25), paddingHorizontal: s(20), flex: 1 }}>
-                    {/*<HorsePicker value={horse} onChange={setHorse} label="Морь" placeholder="Сонгоно уу" />*/}
-
+                    {
+                        data ?
+                        <SelectField
+                            value={category}
+                            onChange={setCategory}
+                            items={data.map((item) => ({value: item.id, name: item.name}))}
+                            label="Ангилал"
+                            placeholder="Сонгоно уу"
+                        /> : <></>
+                    }
                     <TextField label="Утас" value={phone} onChangeText={setPhone} keyboardType="numeric" textContentType="telephoneNumber" />
 
                     <TextField label="Тайлбар" multiline value={description} onChangeText={setDescription} />

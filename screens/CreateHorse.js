@@ -85,9 +85,9 @@ export default function CreateHorseScreen() {
                         value={gender}
                         onChange={setGender}
                         items={[
-                            { value: "FEMALE", label: "Эм" },
-                            { value: "MALE", label: "Эр" },
-                            { value: "OTHER", label: "Зассан" },
+                            { value: "FEMALE", name: "Эм" },
+                            { value: "MALE", name: "Эр" },
+                            { value: "OTHER", name: "Зассан" },
                         ]}
                         label="Хүйс"
                         placeholder="Сонгоно уу"
@@ -97,11 +97,11 @@ export default function CreateHorseScreen() {
                         onChange={setAge}
                         items={[
                             // { value: "Унага", label: "Унага" },
-                            { value: "DAAGA", label: "Даага" },
-                            { value: "SHUDLEN", label: "Шүдлэн" },
-                            { value: "HYAZAALAN", label: "Хязаалан" },
-                            { value: "SOYOLON", label: "Соёолон" },
-                            { value: "IKHNAS", label: "Их нас" },
+                            { value: "DAAGA", name: "Даага" },
+                            { value: "SHUDLEN", name: "Шүдлэн" },
+                            { value: "HYAZAALAN", name: "Хязаалан" },
+                            { value: "SOYOLON", name: "Соёолон" },
+                            { value: "IKHNAS", name: "Их нас" },
                         ]}
                         label="Нас"
                         placeholder="Сонгоно уу"
