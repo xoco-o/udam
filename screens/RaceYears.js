@@ -13,7 +13,7 @@ export default function RaceYearsScreen({ navigation, route }) {
     const [bool, setBool] = useState(false);
 
     useEffect(() => {
-        API.get("festival?category=/"+id, (res) => {
+        API.get('horse/festival?categoryId='+id, (res) => {
             if (res.success) {
                 setRaceYears(res.payload);
                 setBool(true);

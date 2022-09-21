@@ -15,12 +15,11 @@ export default function RaceWinnersScreen({ navigation, route }) {
     const [bool, setBool] = useState(false);
 
     useEffect(() => {
-        API.get('festival/'+id+'/horseTournament', (res) => {
+        API.get('horse/festival/'+id+'/horseTournament', (res) => {
             if (res.success) {
                 setRaceTypes(res.payload);
                 setTypeId(res.payload[0].id)
                 setBool(true);
-                // console.log('res.payload[0].id',res.payload[0].id)
             }
         });
         navigation.setOptions({ headerTitle: title });
