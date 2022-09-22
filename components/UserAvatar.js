@@ -4,13 +4,14 @@ import { Text, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { primaryColor, secondaryColor } from "../utils/constants";
 import colors from "../utils/colors";
+import urls from "../utils/urls";
 
 export default function UserAvatar({ userName, userImage, size = 50 }) {
     return (
         <>
             {userImage ? (
                 <Image
-                    source={{ uri: userImage }}
+                    source={{ uri: urls.resource + userImage }}
                     resizeMode="cover"
                     style={{
                         width: s(size),

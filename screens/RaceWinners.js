@@ -6,6 +6,7 @@ import Tabs from "../components/Tabs";
 import colors from "../utils/colors";
 import UserAvatar from "../components/UserAvatar";
 import API from "../utils/API";
+import {useNavigation} from "@react-navigation/native";
 
 export default function RaceWinnersScreen({ navigation, route }) {
     const { title, id } = route?.params;
@@ -34,6 +35,7 @@ export default function RaceWinnersScreen({ navigation, route }) {
 
     return (
         <View style={{ flex: 1 }}>
+            {/*{console.log('------', typeId, '+++++', raceWinners)}*/}
             <View
                 style={{
                     paddingVertical: s(15),
@@ -81,8 +83,8 @@ export default function RaceWinnersScreen({ navigation, route }) {
 }
 
 function WinnerItem({ item }) {
+    const navigation = useNavigation();
     let winnerColor = "deepOrange";
-
     if (item.name === 'Түрүү магнай') {
         winnerColor = "orange";
     } else if (item.name === 'Аман хүзүү') {
@@ -95,7 +97,8 @@ function WinnerItem({ item }) {
         <ListItem
             title={item.horse.name}
             image={{ source: typeof item.image !== 'undefined' ? item.image.name +'_s.'+ item.image.ext : 'no-image', width: s(120), height: s(67.5) }}
-            imageChild={
+            //ezelsen bair oruulaagui tul tailbar bolgow
+            /*imageChild={
                 <View
                     style={{
                         position: "absolute",
@@ -113,16 +116,17 @@ function WinnerItem({ item }) {
                 >
                     <Text style={{ fontSize: s(10), color: colors[winnerColor][900], fontWeight: "bold", textAlign: "center" }}>{item.position}</Text>
                 </View>
-            }
+            }*/
             textChild={
                 <View style={{ flexDirection: "row", flex: 1, alignItems: "center", marginTop: s(5) }}>
-                    <UserAvatar size={s(30)} />
+                    <UserAvatar userImage={item.horse.coach.image && item.horse.coach.image.name+'_s.'+item.horse.coach.image.ext} size={s(30)} />
                     <View style={{ flex: 1, marginLeft: s(5) }}>
                         <Text style={{ fontSize: s(14) }}>{typeof item.horse.coach !== 'undefined'?item.horse.coach.name:''}</Text>
-                        <Text style={{ fontSize: s(12), color: colors.grey[600] }}>Тод манлай</Text>
+                        {/*<Text style={{ fontSize: s(12), color: colors.grey[600] }}>Тод манлай</Text>*/}
                     </View>
                 </View>
             }
+            onPress={() => navigation.navigate("ViewItems", { url: 'horse/'+item.horse.id })}
         />
     );
 }

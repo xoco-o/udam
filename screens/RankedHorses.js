@@ -56,11 +56,12 @@ function RankedHorseItem({ item, index }) {
                 </View>
             }
             textChild={
+            item.horse.coach &&
                 <View style={{ flexDirection: "row", flex: 1, alignItems: "center", marginTop: s(5) }}>
-                    <UserAvatar size={s(30)} />
+                    <UserAvatar userImage={item.horse.coach.image && item.horse.coach.image.name+'_s.'+item.horse.coach.image.ext} size={s(30)} />
                     <View style={{ flex: 1, marginLeft: s(5) }}>
-                        <Text style={{ fontSize: s(14) }}>Н. Батхуяг</Text>
-                        <Text style={{ fontSize: s(12), color: colors.grey[600] }}>Тод манлай</Text>
+                        <Text style={{ fontSize: s(14) }}>{item.horse.coach.name}</Text>
+                        {/*<Text style={{ fontSize: s(12), color: colors.grey[600] }}>Тод манлай</Text>*/}
                     </View>
                 </View>
             }
