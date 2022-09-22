@@ -23,13 +23,11 @@ export default function OneTeamsScreen({ route }) {
                     horse ?
                     horse.map((item) => (
                     <ListItem
-
                         key={item.id}
                         title={item.name}
                         subtitle={item.club.name}
-                        image={{ source: typeof item.image !== 'undefined' ? item.image.name +'_s.'+ item.image.ext : 'no-image', width: s(80), height: s(80), style: { borderRadius: s(40) } }}
+                        image={{ source: typeof item.image !== 'undefined' ? item.image.name +'_s.'+ item.image.ext : 'no-image', width: s(80), height: s(80), style: { borderRadius: s(40)}}}
                     />
-                        // console.log('11111111',typeof item.image !== 'undefined' ? item.image.path : 'no-image')
                 )):<></>
                 }
             </ScrollView>

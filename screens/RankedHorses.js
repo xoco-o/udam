@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import colors from "../utils/colors";
 import UserAvatar from "../components/UserAvatar";
 import API from "../utils/API";
+import {useNavigation} from "@react-navigation/native";
 
 export default function RankedHorsesScreen({ navigation, route }) {
     const { title, alias } = route?.params;
@@ -36,10 +37,17 @@ export default function RankedHorsesScreen({ navigation, route }) {
 }
 
 function RankedHorseItem({ item, index }) {
+    const navigation = useNavigation();
     return (
+/*
+        (
+            console.log('111', item.horse.id),
+            console.log('111item.image', item.horse.name)
+        )
+*/
         <ListItem
             title={`${index + 1}. ${item.horse.name}`}
-            image={{ source: typeof item.image !== 'undefined' ? item.image.name +'_s.'+ item.image.ext : 'no-image', width: s(120), height: s(67.5) }}
+            image={{ source: typeof item.horse.image !== 'undefined' ? item.horse.image.name +'_s.'+ item.horse.image.ext : 'no-image', width: s(120), height: s(67.5) }}
             imageChild={
                 <View style={{ position: "absolute", top: s(5), left: s(5), flexDirection: "row" }}>
                     <Medals color="orange" count={item.gold} />
@@ -56,6 +64,7 @@ function RankedHorseItem({ item, index }) {
                     </View>
                 </View>
             }
+            onPress={() => navigation.navigate("ViewItems", { url: 'horse/'+item.horse.id })}
         />
     );
 }

@@ -82,10 +82,10 @@ function Walkthrough() {
 function WalkthroughItem({ item }) {
     return (
         <ImageBackground source={item.image} resizeMode="cover" style={{ width: s(designWidth), alignItems: "center", justifyContent: "flex-end" }}>
-            <View style={{ padding: s(20), marginBottom: s(130) }}>
+            {/*<View style={{ padding: s(20), marginBottom: s(130) }}>
                 <Text style={{ color: colors.white, textAlign: "center", fontSize: s(16), fontWeight: "bold", marginBottom: s(10) }}>{item.name}</Text>
                 <Text style={{ color: colors.white, textAlign: "center", fontSize: s(14) }}>{item.description}</Text>
-            </View>
+            </View>*/}
         </ImageBackground>
     );
 }
