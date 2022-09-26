@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import { Image, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { OutlinedButton, PrimaryButton } from "../components/Buttons";
@@ -9,7 +9,6 @@ import TextField from "../components/TextField";
 import colors from "../utils/colors";
 import s from "../utils/getRelativeSize";
 
-import * as ImagePicker from "expo-image-picker";
 import Checkbox from "../components/Checkbox";
 import SelectField from "../components/SelectField";
 import urls from "../utils/urls";
@@ -25,14 +24,14 @@ export default function CreateHorseScreen() {
     const [loading, setLoading] = useState(false);
 
     async function pickImage() {
-        let result = await ImagePicker.launchImageLibraryAsync({
+        /*let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             quality: 1,
         });
         console.log(result);
         if (!result.cancelled) {
             setImage(result.uri);
-        }
+        }*/
     }
 
     function submit() {

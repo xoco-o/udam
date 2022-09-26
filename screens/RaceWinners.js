@@ -19,7 +19,7 @@ export default function RaceWinnersScreen({ navigation, route }) {
         API.get('horse/festival/'+id+'/horseTournament', (res) => {
             if (res.success) {
                 setRaceTypes(res.payload);
-                setTypeId(res.payload[0].id)
+                setTypeId(res.payload[0].id);
                 setBool(true);
             }
         });

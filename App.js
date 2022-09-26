@@ -171,7 +171,7 @@ function AddSheet() {
         setCloseRequested(true);
     }
 
-    const itemCount = 3;
+    const itemCount = 2;
 
     return (
         <BottomSheet open={addSheetOpen} onClose={handleClose} closeRequested={closeRequested} height={s(50 * itemCount) + 25}>
@@ -196,7 +196,7 @@ function AddSheet() {
                     label="Зар нэмэх"
                     onPress={() => handleAddPress("ad")}
                 />
-                <MenuItem
+                {/*<MenuItem
                     hasChevron
                     icon={
                         <View style={{ width: s(25) }}>
@@ -205,7 +205,7 @@ function AddSheet() {
                     }
                     label="Гал нэмэх"
                     onPress={() => handleAddPress("club")}
-                />
+                />*/}
             </View>
         </BottomSheet>
     );

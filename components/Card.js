@@ -4,11 +4,12 @@ import colors from "../utils/colors";
 import Box from "./Box";
 import { SolidTag } from "./Tags";
 import { secondaryColor } from "../utils/constants";
+import urls from "../utils/urls";
 
 export default function Card({ color = colors.grey[100], image, tag, title, description, date }) {
     return (
         <Box color={color}>
-            {image && <Image source={image.source} style={{ width: image.width, height: image.height, resizeMode: "cover" }} />}
+            {image && <Image source={image.source !== "no-image" ? { uri: urls.resource + image.source } : require("../assets/no-image.png")} style={{ width: image.width, height: image.height, resizeMode: "cover" }} />}
 
             {tag && (
                 <View style={image ? { position: "absolute", top: s(8), right: 0 } : { flexDirection: "row", justifyContent: "flex-end", marginTop: s(15), marginRight: s(8) }}>

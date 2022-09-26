@@ -25,7 +25,7 @@ export default function GuestSignupScreen({ navigation }) {
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const em = email? {email: email}:{};
-    const form = {loginname:loginname, phone:phone, em, pword:password, rpword:passwordConfirm,givenname:givenname,surename:surname }
+    const form = {loginname:loginname, phone:phone, em, pword:password, rpword:passwordConfirm,givenname:givenname,surename:surname };
 
     const [acceptedTerms, setAcceptedTerms] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -62,7 +62,7 @@ export default function GuestSignupScreen({ navigation }) {
                     { cancelable: true }
                 );
             }else {
-                Alert.alert('', responseJson.errors[0].defaultMessage,'',{ cancelable: true })
+                Alert.alert('', responseJson.errors[0].defaultMessage,'',{ cancelable: true });
                 setLoading(false);
             }
         }).catch((err) => {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";
 import Tabs from "../components/Tabs";
 import colors from "../utils/colors";
@@ -10,18 +10,27 @@ import RelativeTime from "../components/RelativeTime";
 import BottomSheet from "../components/BottomSheet";
 import MenuItem from "../components/MenuItem";
 import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
-import { ads, horseTypes } from "../utils/sampleData";
+// import { ads, horseTypes } from "../utils/sampleData";
+import API from "../utils/API";
 
 export default function AdsScreen() {
-    const [typeId, setTypeId] = useState("0");
+    // const [typeId, setTypeId] = useState("0");
+    const [ads, setAds] = useState();
 
+    useEffect(() => {
+        API.get("ad/list", (res) => {
+            if (res.success) {
+                setAds(res.payload.thisPageElements);
+            }
+        });
+    }, []);
     const renderItem = ({ item }) => <AdItem item={item} />;
 
     return (
         <View style={{ flex: 1, backgroundColor: colors.white, paddingTop: getStatusBarHeight() }}>
             <FlatList
                 ListFooterComponent={<View style={{ height: s(100) }} />}
-                ListHeaderComponent={
+                /*ListHeaderComponent={
                     <View style={{ paddingVertical: s(15) }}>
                         <Tabs
                             value={typeId}
@@ -35,7 +44,7 @@ export default function AdsScreen() {
                             containerStyles={{ paddingHorizontal: s(15) }}
                         />
                     </View>
-                }
+                }*/
                 data={ads}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
@@ -60,7 +69,7 @@ function AdItem({ item }) {
     return (
         <>
             <TouchableOpacity style={{ width: s(345), marginLeft: s(15) }} activeOpacity={0.5} onPress={() => setOpen(true)}>
-                <Card image={item.image} title={item.title} description={item.description} tag={`${numeral(item.price).format()} ₮`} date={<RelativeTime date={item.created} />} />
+                <Card image={{source: typeof item.images[0] !== 'undefined' ? item.images[0].name +'_s.'+ item.images[0].ext : 'no-image', width: s(345), height: s(200)}} title={item.name} description={item.category.name} tag={`${numeral(item.price).format()} ₮`} date={<RelativeTime date={item.published} />} />
             </TouchableOpacity>
 
             <BottomSheet open={open} onClose={handleClose} closeRequested={closeRequested} height={s(50 * 3) + 25}>

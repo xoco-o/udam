@@ -3,7 +3,6 @@ import urls from './urls';
 const API = {
 
     get: function (url, callback) {
-
         // console.log('4444444444',urls.api + url);
 
         fetch(urls.api + url, { method: 'GET', credentials: 'include', headers: {
