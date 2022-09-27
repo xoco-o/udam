@@ -15,6 +15,7 @@ export default function ListItem({
     imageChild,
     textChild,
 }) {
+    // console.log('33333333',urls.resource + image.source)
     return (
         <TouchableHighlight
             underlayColor={underlayColor}
