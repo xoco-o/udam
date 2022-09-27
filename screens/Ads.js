@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import { View, FlatList, TouchableOpacity } from "react-native";
+import { View, FlatList, TouchableOpacity, Linking } from "react-native";
 import Tabs from "../components/Tabs";
 import colors from "../utils/colors";
 import s from "../utils/getRelativeSize";
@@ -12,6 +12,7 @@ import MenuItem from "../components/MenuItem";
 import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
 // import { ads, horseTypes } from "../utils/sampleData";
 import API from "../utils/API";
+import {useNavigation} from "@react-navigation/native";
 
 export default function AdsScreen() {
     // const [typeId, setTypeId] = useState("0");
@@ -56,14 +57,15 @@ export default function AdsScreen() {
 function AdItem({ item }) {
     const [open, setOpen] = useState(false);
     const [closeRequested, setCloseRequested] = useState(false);
+    const navigation = useNavigation();
 
     function handleClose() {
         setOpen(false);
         setCloseRequested(false);
     }
 
-    function handleAddPress(action) {
-        console.log(action);
+    function handleAddPress(action, adUrl) {
+        navigation.navigate(action, adUrl);
         setCloseRequested(true);
     }
     return (
@@ -72,9 +74,9 @@ function AdItem({ item }) {
                 <Card image={{source: typeof item.images[0] !== 'undefined' ? item.images[0].name +'_s.'+ item.images[0].ext : 'no-image', width: s(345), height: s(200)}} title={item.name} description={item.category.name} tag={`${numeral(item.price).format()} ₮`} date={<RelativeTime date={item.published} />} />
             </TouchableOpacity>
 
-            <BottomSheet open={open} onClose={handleClose} closeRequested={closeRequested} height={s(50 * 3) + 25}>
+            <BottomSheet open={open} onClose={handleClose} closeRequested={closeRequested} height={s(50 * 2) + 25}>
                 <View style={{ flex: 1 }}>
-                    <MenuItem
+                    {/*<MenuItem
                         icon={
                             <View style={{ width: s(25) }}>
                                 <FontAwesome name="bookmark" color={colors.grey[600]} size={s(16)} />
@@ -82,6 +84,15 @@ function AdItem({ item }) {
                         }
                         label="Хадгалах"
                         onPress={() => handleAddPress("email")}
+                    />*/}
+                    <MenuItem
+                        icon={
+                            <View style={{ width: s(25) }}>
+                                <FontAwesome5 name="horse" color={colors.grey[600]} size={s(16)} />
+                            </View>
+                        }
+                        label="Зар үзэх"
+                        onPress={() => handleAddPress('OneAd', `ad/${item.id}`)}
                     />
 
                     <MenuItem
@@ -91,11 +102,13 @@ function AdItem({ item }) {
                             </View>
                         }
                         label="Холбоо барих"
-                        value="99359299"
-                        onPress={() => handleAddPress("email")}
+                        value={item.phone}
+                        onPress={() => {
+                            Linking.openURL(`tel:${item.phone}`);
+                            setCloseRequested(true);
+                        }}
                     />
-
-                    <MenuItem
+                    {/*<MenuItem
                         hasChevron
                         icon={
                             <View style={{ width: s(25) }}>
@@ -104,7 +117,7 @@ function AdItem({ item }) {
                         }
                         label="Удам үзэх"
                         onPress={() => handleAddPress("qrcode")}
-                    />
+                    />*/}
                 </View>
             </BottomSheet>
         </>

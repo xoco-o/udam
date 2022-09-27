@@ -12,9 +12,11 @@ import s from "../utils/getRelativeSize";
 import Checkbox from "../components/Checkbox";
 import SelectField from "../components/SelectField";
 import urls from "../utils/urls";
+import * as ImagePicker from "expo-image-picker";
+import {useNavigation} from "@react-navigation/native";
 
 export default function CreateHorseScreen() {
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState([]);
     const [name, setName] = useState("");
     const [color, setColor] = useState("");
     const [gender, setGender] = useState("");
@@ -22,42 +24,69 @@ export default function CreateHorseScreen() {
     const [isMine, setIsMine] = useState(true);
     const [isPublic, setIsPublic] = useState(true);
     const [loading, setLoading] = useState(false);
+    const navigation = useNavigation();
 
+    const formData = new FormData();
     async function pickImage() {
-        /*let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             quality: 1,
+            // allowsMultipleSelection: true
         });
-        console.log(result);
         if (!result.cancelled) {
-            setImage(result.uri);
-        }*/
+            formData._parts = [];
+            if(typeof result.selected !== 'undefined'){
+                setImage(result.selected);
+            } else {
+                setImage([result]);
+            }
+        }
     }
 
     function submit() {
-        const form = {
-            // user: user.id,
-            "name": name,
-            "color": color,
-            "gender": gender,
-            "horseAge" : age
-        };
+        if(image!==[]){
+            formData._parts = [];
+            /*for (let i=0; i < image.length; i++){
+                let uriParts = image[i].uri.split('.');
+                let type = uriParts[uriParts.length - 1];
+                formData.append('imageForms['+i+'].file', {
+                    uri: image[i].uri,
+                    name: `photo.${type}`,
+                    type: `image/${type}`,
+                })
+            }*/
+            let uriParts = image[0].uri.split('.');
+            let type = uriParts[uriParts.length - 1];
+            formData.append('imageFile', {
+                uri: image[0].uri,
+                name: `photo.${type}`,
+                type: `image/${type}`,
+            })
+        }
+        formData.append('name', name);
+        formData.append('color', color);
+        formData.append('gender', gender);
+        formData.append('horseAge', age);
+        setLoading(true);
         fetch(urls.api + `client/horse/create`, {
             method: "POST", credentials: 'include',
             headers: {
                 'Accept': 'application/json',
-                "Content-Type": "application/json",
+                'Content-Type': 'multipart/form-data',
             },
-            body: form? JSON.stringify(form) : "",
+            body: formData,
         }).then((response) => {
+            setLoading(false);
             if(response.status===200){
                 return response.json();
             } else alert(response.status);
             return null;
         }).then((data) => {
-            alert(data.text)
+            alert(data.text);
+            navigation.navigate("TabNavigator");
         }).catch((err) => {
             alert("catch:  " + err);
+            setLoading(false);
         });
     }
 
@@ -65,7 +94,7 @@ export default function CreateHorseScreen() {
         <View style={{ flex: 1, backgroundColor: colors.white }}>
             <KeyboardAwareScrollView>
                 <View style={{ paddingVertical: s(25), paddingHorizontal: s(20), flex: 1 }}>
-                    {image && (
+                    {/*{image && (
                         <View style={{ marginBottom: s(20), alignItems: "center" }}>
                             <Image
                                 style={{ width: s(300), height: s(200), resizeMode: "contain" }}
@@ -74,7 +103,7 @@ export default function CreateHorseScreen() {
                                 }}
                             />
                         </View>
-                    )}
+                    )}*/}
                     <FormField>
                         <OutlinedButton onPress={pickImage}>Зураг сонгох</OutlinedButton>
                     </FormField>

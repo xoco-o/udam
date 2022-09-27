@@ -9,13 +9,14 @@ import colors from "../utils/colors";
 import API from "../utils/API";
 import urls from "../utils/urls";
 import {ModalLoader} from "../components/Loaders";
+import {useNavigation} from "@react-navigation/native";
 
 export default function HorsesScreen({ navigation, route }) {
     const { title, alias } = route?.params;
     const [data, setData] = useState([]);
     let url;
     if(alias==='ALL')url='client/horse';
-    else url=`api/client/horse?horseAge=${alias}`;
+    else url=`client/horse/horseAge/${alias}`;
     useEffect(() => {
         API.get(url, (res) => {
             if (res.success) {
@@ -39,5 +40,8 @@ export default function HorsesScreen({ navigation, route }) {
 }
 
 function HorseListItem({ item }) {
-    return <ListItem title={item.name} /*subtitle={item.subtitle}*/ image={{ source: typeof item.image !== 'undefined' ? item.image.path : 'no-image', width: s(120), height: s(67.5) }} />;
+    const navigation = useNavigation();
+    return <ListItem title={item.name} /*subtitle={item.subtitle}*/ image={{ source: typeof item.image !== 'undefined' ? item.image.path : 'no-image', width: s(120), height: s(67.5) }}
+                     onPress={() => navigation.navigate("ViewItems", { url: 'horse/'+item.id })}
+    />;
 }

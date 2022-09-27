@@ -30,6 +30,7 @@ import { primaryColor } from "./utils/constants";
 import s from "./utils/getRelativeSize";
 import { addSheetOpenState, userState } from "./utils/recoilAtoms";
 import ViewItemsScreen from "./screens/ViewItems";
+import OneAdScreen from "./screens/OneAd";
 
 export default function App() {
     return (
@@ -66,6 +67,7 @@ function Main() {
                 <Stack.Screen name="Ranks" component={RanksScreen} options={{ headerBackTitle: "", headerTitle: "Төрийн түмэн эхүүд" }} />
                 <Stack.Screen name="RankedHorses" component={RankedHorsesScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
                 <Stack.Screen name="Teams" component={TeamsScreen} options={{ headerBackTitle: "", headerTitle: "Галууд" }} />
+                <Stack.Screen name="OneAd" component={OneAdScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
                 <Stack.Screen name="ViewItems" component={ViewItemsScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
                 <Stack.Screen
                     name="OneTeam"
