@@ -31,7 +31,7 @@ export default function CreateHorseScreen() {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             quality: 1,
-            // allowsMultipleSelection: true
+            allowsMultipleSelection: true
         });
         if (!result.cancelled) {
             formData._parts = [];
@@ -46,7 +46,7 @@ export default function CreateHorseScreen() {
     function submit() {
         if(image!==[]){
             formData._parts = [];
-            /*for (let i=0; i < image.length; i++){
+            for (let i=0; i < image.length; i++){
                 let uriParts = image[i].uri.split('.');
                 let type = uriParts[uriParts.length - 1];
                 formData.append('imageForms['+i+'].file', {
@@ -54,19 +54,13 @@ export default function CreateHorseScreen() {
                     name: `photo.${type}`,
                     type: `image/${type}`,
                 })
-            }*/
-            let uriParts = image[0].uri.split('.');
-            let type = uriParts[uriParts.length - 1];
-            formData.append('imageFile', {
-                uri: image[0].uri,
-                name: `photo.${type}`,
-                type: `image/${type}`,
-            })
+            }
         }
         formData.append('name', name);
         formData.append('color', color);
         formData.append('gender', gender);
         formData.append('horseAge', age);
+        // console.log('---------------', formData)
         setLoading(true);
         fetch(urls.api + `client/horse/create`, {
             method: "POST", credentials: 'include',

@@ -57,8 +57,8 @@ export default function SettingsScreen() {
                         />
                         <MenuBorder />
                         <MenuItem label="Үйлчилгээний нөхцөл" icon={<MaterialCommunityIcons name="playlist-check" size={s(20)} color={colors.blue[400]} />} hasChevron onPress={() => alert("Тун удахгүй...")} />
-                        <MenuBorder />
-                        <MenuItem label="Аппын хувилбар" icon={<MaterialCommunityIcons name="information-outline" size={s(20)} color={colors.blue[400]} />} value="0.23.1" />
+                       {/* <MenuBorder />
+                        <MenuItem label="Аппын хувилбар" icon={<MaterialCommunityIcons name="information-outline" size={s(20)} color={colors.blue[400]} />} value="0.23.1" />*/}
                     </Box>
 
                     <Box color={colors.white}>
