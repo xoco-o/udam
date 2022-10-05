@@ -30,24 +30,26 @@ export default function OneAdScreen({ route }) {
                 {
                     data ?
                         <View style={{margin: s(10)}}>
-                            <ScrollView
-                                ref={scrollElement}
-                                horizontal
-                                style={{width: '100%', height: 260,marginBottom: s(15)}}
-                                pagingEnabled
-                                showsHorizontalScrollIndicator={false}
-                                onMomentumScrollEnd={(event) => setActive(Math.floor(event.nativeEvent.contentOffset.x / s(designWidth-20)))}
-                            >
-                                <View style={{ flexDirection: "row" }}>
-                                    {data.images.map((item) => (
-                                        <ScrollItem item={item} key={item.id} />
+                            <View style={{marginBottom: s(15), borderRadius: s(10), overflow: "hidden" }}>
+                                <ScrollView
+                                    ref={scrollElement}
+                                    horizontal
+                                    style={{width: '100%', height: 260}}
+                                    pagingEnabled
+                                    showsHorizontalScrollIndicator={false}
+                                    onMomentumScrollEnd={(event) => setActive(Math.floor(event.nativeEvent.contentOffset.x / s(designWidth-20)))}
+                                >
+                                    <View style={{ flexDirection: "row" }}>
+                                        {data.images.map((item) => (
+                                            <ScrollItem item={item} key={item.id} />
+                                        ))}
+                                    </View>
+                                </ScrollView>
+                                <View style={{ flexDirection: "row", position: "absolute", right: 0, left: 0, bottom: s(10), justifyContent: "center" }}>
+                                    {data.images.map((_, index) => (
+                                        <PageIndicator key={index} isActive={index === active} />
                                     ))}
                                 </View>
-                            </ScrollView>
-                            <View style={{ flexDirection: "row", position: "absolute", right: 0, left: 0, bottom: s(110), justifyContent: "center" }}>
-                                {data.images.map((_, index) => (
-                                    <PageIndicator key={index} isActive={index === active} />
-                                ))}
                             </View>
                             <Box color={colors.white}>
                                     {
@@ -90,7 +92,7 @@ export default function OneAdScreen({ route }) {
         )
     }
     function ScrollItem({ item }) {
-        // console.log('-------',urls.resource + item.name +'_s.'+ item.ext)
+        console.log('-------',active);
         return (
                 <ImageBackground
                     source={{uri: urls.resource + item.name +'_s.'+ item.ext}}
@@ -101,6 +103,7 @@ export default function OneAdScreen({ route }) {
     }
 
     function PageIndicator({ isActive }) {
-        return <View style={{ width: s(10), height: s(10), backgroundColor: isActive ? "#fff" : "rgba(255,255,255,0.5)", borderRadius: s(5), marginHorizontal: s(5) }} />;
+        console.log('-------==',isActive);
+        return <View style={{ width: s(7), height: s(7), backgroundColor: isActive ? "#fff" : "rgba(255,255,255,0.5)", borderRadius: s(3), marginHorizontal: s(5) }} />;
     }
 }

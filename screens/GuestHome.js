@@ -12,7 +12,6 @@ export default function GuestHomeScreen({ navigation }) {
             <View style={{ flex: 1 }}>
                 <Walkthrough />
             </View>
-
             <View style={{ position: "absolute", right: 0, left: 0, bottom: s(30) }}>
                 <View style={{ flexDirection: "row", marginHorizontal: s(10) }}>
                     <View style={{ flex: 1, marginRight: s(15) }}>
@@ -23,7 +22,6 @@ export default function GuestHomeScreen({ navigation }) {
                     </View>
                 </View>
             </View>
-
             <StatusBar style="light" />
         </View>
     );

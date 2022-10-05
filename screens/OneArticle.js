@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { ScrollView, Text, useWindowDimensions, View } from "react-native";
+import {ImageBackground, ScrollView, Text, useWindowDimensions, View} from "react-native";
 import RenderHTML from "react-native-render-html";
 import { BlockLoader } from "../components/Loaders";
 import RelativeTime from "../components/RelativeTime";
 import API from "../utils/API";
 import colors from "../utils/colors";
-import s from "../utils/getRelativeSize";
+import urls from "../utils/urls";
 
 export default function OneArticleScreen({ route }) {
     const [article, setArticle] = useState(route.params.article);
@@ -29,6 +29,11 @@ export default function OneArticleScreen({ route }) {
                         <RelativeTime date={article.published} />
                     </Text>
                 </View>
+                <ImageBackground
+                    source={{uri: urls.resource + article.image.name +'_s.'+ article.image.ext}}
+                    style={{width: '100%', height: 250,resizeMode: "cover"}}
+                >
+                </ImageBackground>
 
                 {article.text ? (
                     <View style={{ paddingHorizontal: s(20) }}>

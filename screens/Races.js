@@ -10,7 +10,7 @@ import API from "../utils/API";
 
 export default function RacesScreen({ navigation }) {
     const [races, setRaces] = useState();
-
+    let n;
     useEffect(() => {
         API.get("festival/category", (res) => {
             if (res.success) {
@@ -27,11 +27,10 @@ export default function RacesScreen({ navigation }) {
                             races ?
                             races.map((race, index) => (
                             <View key={race.id}>
-                                <MenuItem label={race.name} hasChevron onPress={() => navigation.navigate("RaceYears", { title: race.name, id: race.id })} />
+                                <MenuItem label={index+1+'. '+race.name} hasChevron onPress={() => navigation.navigate("RaceYears", { title: race.name, id: race.id })} />
                                 {races.length - 1 > index && <MenuBorder />}
                             </View>
                         )):<></>
-
                         }
                     </Box>
                 </View>

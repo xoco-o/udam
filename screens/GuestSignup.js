@@ -11,7 +11,6 @@ import { ModalLoader } from "../components/Loaders";
 import { userState } from "../utils/recoilAtoms";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import urls from "../utils/urls";
-import {useNavigation} from "@react-navigation/native";
 
 export default function GuestSignupScreen({ navigation }) {
     const setUser = useSetRecoilState(userState);
@@ -52,15 +51,32 @@ export default function GuestSignupScreen({ navigation }) {
             }
         }).then((responseJson) => {
             if (responseJson === null){
-                Alert.alert('', 'Амжилттай бүртгүүллээ', [
-                        {
-                            text: 'Нэвтрэх', onPress: () => {
-                                navigation.navigate('GuestLogin');
-                            }
-                        }
-                    ],
-                    { cancelable: true }
-                );
+                fetch(urls.api + `core/signin`, {
+                    method: "POST", credentials: 'include',
+                    headers: {
+                        'Accept': 'application/json',
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        'loginname': loginname,
+                        'password': password
+                    }),
+                }).then((response) => {
+                    if (response.status === 200) {
+                        setUser({
+                            loginName: loginname,
+                            givenName: givenname!==""?givenname:undefined,
+                            email: email,
+                        });
+                        Alert.alert('', 'Амжилттай бүртгүүллээ');
+                    } else {
+                        alert("Нэвтрэхэд алдаа гарлаа.");
+                        setLoading(false);
+                    }
+                }).catch((err) => {
+                    alert("catch:  " + err);
+                    setLoading(false);
+                });
             }else {
                 Alert.alert('', responseJson.errors[0].defaultMessage,'',{ cancelable: true });
                 setLoading(false);
