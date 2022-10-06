@@ -1,7 +1,7 @@
 import { View, ScrollView, Text } from "react-native";
 import s from "../utils/getRelativeSize";
 import ListItem from "../components/ListItem";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tabs from "../components/Tabs";
 import colors from "../utils/colors";
 import UserAvatar from "../components/UserAvatar";
@@ -12,7 +12,7 @@ export default function RaceWinnersScreen({ navigation, route }) {
     const { title, id } = route?.params;
     const [typeId, setTypeId] = useState();
     const [raceTypes, setRaceTypes] = useState();
-    const [raceWinners, setRaceWinners] = useState();
+    const [raceWinners, setRaceWinners] = useState([]);
     const [bool, setBool] = useState(false);
 
     useEffect(() => {
@@ -68,16 +68,19 @@ export default function RaceWinnersScreen({ navigation, route }) {
                         /> : <Text style={{ margin: 20, fontSize: 16, color: '#ccc'}}>Хоосон байна.</Text>
                 }
             </View>
-
-            <ScrollView>
-                {
-                    raceWinners?
-                    raceWinners.map((winner) => (
-                    <WinnerItem item={winner} key={winner.id} />
-                )):<></>
-                }
-                <View style={{ height: s(100) }} />
-            </ScrollView>
+            raceWinners?
+            <View>
+                <Text style={{ marginLeft: s(15),marginTop: s(15),fontWeight: '500', }}>Нийт: {raceWinners.length}</Text>
+                <ScrollView>
+                    {
+                        raceWinners.map((winner) => (
+                            <WinnerItem item={winner} key={winner.id} />
+                        ))}
+                    <View style={{ height: s(100) }} />
+                </ScrollView>
+            </View>
+            :
+            <></>
         </View>
     );
 }

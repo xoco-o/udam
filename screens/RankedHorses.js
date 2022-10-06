@@ -1,7 +1,7 @@
 import { View, FlatList, Text } from "react-native";
 import s from "../utils/getRelativeSize";
 import ListItem from "../components/ListItem";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import colors from "../utils/colors";
 import UserAvatar from "../components/UserAvatar";
 import API from "../utils/API";
@@ -9,7 +9,7 @@ import {useNavigation} from "@react-navigation/native";
 
 export default function RankedHorsesScreen({ navigation, route }) {
     const { title, alias } = route?.params;
-    const [rankedHorses, setRankedHorses] = useState();
+    const [rankedHorses, setRankedHorses] = useState([]);
     const [bool, setBool] = useState(false);
 
     useEffect(() => {
@@ -25,14 +25,13 @@ export default function RankedHorsesScreen({ navigation, route }) {
     const renderItem = ({ item, index }) => <RankedHorseItem item={item} index={index} />;
 
     return (
+        bool?
         <View style={{ flex: 1 }}>
-            {
-                bool?
-                    <FlatList data={rankedHorses} renderItem={renderItem} keyExtractor={(item) => item.id} ListFooterComponent={<View style={{ height: s(100) }} />} />
-                    :
-                    <></>
-            }
+            <Text style={{ marginLeft: s(15),marginTop: s(15),fontWeight: '500', }}>Нийт: {rankedHorses.length}</Text>
+            <FlatList data={rankedHorses} renderItem={renderItem} keyExtractor={(item) => item.id} ListFooterComponent={<View style={{ height: s(100) }} />} />
         </View>
+            :
+            <></>
     );
 }
 
