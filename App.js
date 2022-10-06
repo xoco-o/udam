@@ -52,6 +52,21 @@ function UserProvider({ children }) {
 
 const Stack = createNativeStackNavigator();
 
+function HomeStack () {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Info" component={InfoScreen} options={{ headerShown: false,}} />
+            <Stack.Screen name="Races" component={RacesScreen} options={{ headerBackTitle: "", headerTitle: "Уралдаанууд" }} />
+            <Stack.Screen name="RaceYears" component={RaceYearsScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
+            <Stack.Screen name="RaceWinners" component={RaceWinnersScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
+            <Stack.Screen name="Ranks" component={RanksScreen} options={{ headerBackTitle: "", headerTitle: "Төрийн түмэн эхүүд" }} />
+            <Stack.Screen name="RankedHorses" component={RankedHorsesScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
+            <Stack.Screen name="OneAd" component={OneAdScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
+            <Stack.Screen name="ViewItems" component={ViewItemsScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
+        </Stack.Navigator>
+    );
+}
+
 function Main() {
     return (
         <>
@@ -59,16 +74,9 @@ function Main() {
                 <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
                 <Stack.Screen name="Components" component={Components} />
                 <Stack.Screen name="Horses" component={HorsesScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
-                <Stack.Screen name="Races" component={RacesScreen} options={{ headerBackTitle: "", headerTitle: "Уралдаанууд" }} />
-                <Stack.Screen name="RaceYears" component={RaceYearsScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
-                <Stack.Screen name="RaceWinners" component={RaceWinnersScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
                 <Stack.Screen name="Articles" component={ArticlesScreen} options={{ headerBackTitle: "", headerTitle: "Мэдээ, нийтлэл" }} />
                 <Stack.Screen name="OneArticle" component={OneArticleScreen} options={{ headerBackTitle: "", headerTitle: "Мэдээ" }} />
-                <Stack.Screen name="Ranks" component={RanksScreen} options={{ headerBackTitle: "", headerTitle: "Төрийн түмэн эхүүд" }} />
-                <Stack.Screen name="RankedHorses" component={RankedHorsesScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
                 <Stack.Screen name="Teams" component={TeamsScreen} options={{ headerBackTitle: "", headerTitle: "Галууд" }} />
-                <Stack.Screen name="OneAd" component={OneAdScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
-                <Stack.Screen name="ViewItems" component={ViewItemsScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
                 <Stack.Screen
                     name="OneTeam"
                     component={OneTeamsScreen}
@@ -98,8 +106,8 @@ function TabNavigator() {
             }}
         >
             <Tab.Screen
-                name="Info"
-                component={InfoScreen}
+                name="Home"
+                component={HomeStack}
                 options={{
                     tabBarLabel: "Мэдээлэл",
                     tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? "newspaper" : "newspaper-outline"} color={color} size={size - 3} />,

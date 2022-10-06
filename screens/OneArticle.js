@@ -5,6 +5,7 @@ import { BlockLoader } from "../components/Loaders";
 import RelativeTime from "../components/RelativeTime";
 import API from "../utils/API";
 import colors from "../utils/colors";
+import s from "../utils/getRelativeSize";
 import urls from "../utils/urls";
 
 export default function OneArticleScreen({ route }) {
