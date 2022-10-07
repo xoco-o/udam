@@ -68,19 +68,21 @@ export default function RaceWinnersScreen({ navigation, route }) {
                         /> : <Text style={{ margin: 20, fontSize: 16, color: '#ccc'}}>Хоосон байна.</Text>
                 }
             </View>
-            raceWinners?
-            <View>
-                <Text style={{ marginLeft: s(15),marginTop: s(15),fontWeight: '500', }}>Нийт: {raceWinners.length}</Text>
-                <ScrollView>
-                    {
-                        raceWinners.map((winner) => (
-                            <WinnerItem item={winner} key={winner.id} />
-                        ))}
-                    <View style={{ height: s(100) }} />
-                </ScrollView>
-            </View>
-            :
-            <></>
+            {
+                raceWinners?
+                    <View>
+                        <Text style={{ marginLeft: s(15),marginTop: s(15),fontWeight: '500', }}>Нийт: {raceWinners.length}</Text>
+                        <ScrollView>
+                            {
+                                raceWinners.map((winner) => (
+                                    <WinnerItem item={winner} key={winner.id} />
+                                ))}
+                            <View style={{ height: s(100) }} />
+                        </ScrollView>
+                    </View>
+                    :
+                    <></>
+            }
         </View>
     );
 }

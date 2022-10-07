@@ -92,7 +92,7 @@ export default function OneAdScreen({ route }) {
         )
     }
     function ScrollItem({ item }) {
-        console.log('-------',active);
+        // console.log('-------',active);
         return (
                 <ImageBackground
                     source={{uri: urls.resource + item.name +'_s.'+ item.ext}}
