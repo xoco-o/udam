@@ -8,11 +8,12 @@ import Box from "../components/Box";
 import {BlockLoader} from "../components/Loaders";
 import MenuBorder from "../components/MenuBorder";
 import ListItem from "../components/ListItem";
+import {useNavigation} from "@react-navigation/native";
 
 export default function ViewItemsScreen({ route }) {
     const [url, setUrl] = useState(route.params.url);
     const [data, setData] = useState();
-
+    const navigation = useNavigation();
     useEffect(() => {
         API.get(url, (res) => {
             if (res.success) {
@@ -58,6 +59,7 @@ export default function ViewItemsScreen({ route }) {
                                 <ListItem
                                     key={data.coach.id}
                                     title={data.coach.name}
+                                    onPress={() => navigation.navigate('Coach', data.coach.id)}
                                     image={{ source: typeof data.coach.image !== 'undefined' ? data.coach.image.name +'_s.'+ data.coach.image.ext : 'no-image', width: s(80), height: s(80), style: { borderRadius: s(40)}}}
                                 />
                             }

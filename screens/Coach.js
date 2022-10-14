@@ -49,7 +49,7 @@ export default function CoachScreen({ route }) {
                             label={typeof data.degree !== 'undefined' ?data.degree.name:''}
                             icon={<MaterialCommunityIcons name="trophy" size={s(20)} color={colors.yellow[600]} />}
                         />
-                        <MenuItem label={typeof data.city !== 'undefined' ?data.city.name:''} icon={<MaterialCommunityIcons name="map-marker" size={s(20)} color={colors.red[400]} />}/>
+                        <MenuItem label={typeof data.city !== 'undefined' ? data.city.id!== 1 ? data.city.name+' аймаг' : data.city.name:''} icon={<MaterialCommunityIcons name="map-marker" size={s(20)} color={colors.red[400]} />}/>
                         <MenuItem
                             label={typeof data.club !== 'undefined' ?data.club.name:''}
                             icon={<MaterialCommunityIcons name="fire" size={s(20)} color={colors.orange[600]}/>}

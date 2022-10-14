@@ -2,7 +2,6 @@ import {View, FlatList, Text, TouchableOpacity} from "react-native";
 import s from "../utils/getRelativeSize";
 import ListItem from "../components/ListItem";
 import React, {useEffect, useState} from "react";
-import colors from "../utils/colors";
 import UserAvatar from "../components/UserAvatar";
 import API from "../utils/API";
 import {useNavigation} from "@react-navigation/native";

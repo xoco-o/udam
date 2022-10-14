@@ -3,6 +3,8 @@ import colors from "../utils/colors";
 import s from "../utils/getRelativeSize";
 import noop from "../utils/noop";
 import urls from "../utils/urls";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
+import React from "react";
 
 export default function ListItem({
     image,
@@ -13,7 +15,7 @@ export default function ListItem({
     onLongPress = noop,
     rootChild,
     imageChild,
-    textChild,
+    location,
 }) {
     // console.log('33333333',urls.resource + image.source)
     return (
@@ -59,10 +61,12 @@ export default function ListItem({
                             <Text style={{ marginBottom: s(5), fontSize: s(12), marginTop: s(5), color: colors.grey[600] }}>{subtitle}</Text>
                         </>
                     )}
-
-                    {textChild}
+                    {location && (
+                        <>
+                            <Text style={{ marginBottom: s(5), fontSize: s(13), marginTop: s(5), color: colors.grey[600] }}><MaterialCommunityIcons name="map-marker" size={s(15)} color={colors.grey[600]} /> {location}</Text>
+                        </>
+                    )}
                 </View>
-
                 {rootChild}
             </View>
         </TouchableHighlight>
