@@ -10,6 +10,7 @@ import urls from "../utils/urls";
 
 export default function OneArticleScreen({ route }) {
     const [article, setArticle] = useState(route.params.article);
+    const [articleText, setArticleText] = useState(null);
 
     const { width } = useWindowDimensions();
 
@@ -17,6 +18,7 @@ export default function OneArticleScreen({ route }) {
         API.get(`a/${article.id}`, (res) => {
             if (res.success) {
                 setArticle(res.payload);
+                setArticleText(res.payload.text.replace("/resource/", urls.resource))
             }
         });
     }, []);
@@ -36,12 +38,12 @@ export default function OneArticleScreen({ route }) {
                 >
                 </ImageBackground>
 
-                {article.text ? (
+                {articleText ? (
                     <View style={{ paddingHorizontal: s(20) }}>
                         <RenderHTML
                             contentWidth={width}
                             source={{
-                                html: article.text,
+                                html: articleText,
                             }}
                             baseStyle={{ fontSize: s(16), lineHeight: s(22.5) }}
                         />
