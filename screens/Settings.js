@@ -9,10 +9,11 @@ import UserAvatar from "../components/UserAvatar";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { userState } from "../utils/recoilAtoms";
 import {useRecoilState, useSetRecoilState,} from "recoil";
+import {useNavigation} from "@react-navigation/native";
 
 export default function SettingsScreen() {
     const [user,setUser] = useRecoilState(userState);
-    // const [givenName, loginName] = useSetRecoilState(userState);
+    const navigation = useNavigation();
 
     function logout() {
         Alert.alert("Гарах уу?", "", [
@@ -47,16 +48,16 @@ export default function SettingsScreen() {
                     </Box>
 
                     <Box color={colors.white}>
-                        <MenuItem label="Холбоо барих" icon={<MaterialCommunityIcons name="phone-outline" size={s(20)} color={colors.blue[400]} />} hasChevron onPress={() => alert("Тун удахгүй...")} />
+                        <MenuItem label="Холбоо барих" icon={<MaterialCommunityIcons name="phone-outline" size={s(20)} color={colors.blue[400]} />} hasChevron onPress={() => navigation.navigate('StaticPage', {headTitle: 'Холбоо барих', url: 'p/1'})} />
                         <MenuBorder />
                         <MenuItem
                             label="Нууцлалын бодлого"
                             icon={<MaterialCommunityIcons name="shield-account-outline" size={s(20)} color={colors.blue[400]} />}
                             hasChevron
-                            onPress={() => alert("Тун удахгүй...")}
+                            onPress={() => navigation.navigate('StaticPage', {headTitle: 'Нууцлалын бодлого', url: 'p/2'})}
                         />
                         <MenuBorder />
-                        <MenuItem label="Үйлчилгээний нөхцөл" icon={<MaterialCommunityIcons name="playlist-check" size={s(20)} color={colors.blue[400]} />} hasChevron onPress={() => alert("Тун удахгүй...")} />
+                        <MenuItem label="Үйлчилгээний нөхцөл" icon={<MaterialCommunityIcons name="playlist-check" size={s(20)} color={colors.blue[400]} />} hasChevron onPress={() => navigation.navigate('StaticPage', {headTitle: 'Үйлчилгээний нөхцөл', url: 'p/3'})} />
                        {/* <MenuBorder />
                         <MenuItem label="Аппын хувилбар" icon={<MaterialCommunityIcons name="information-outline" size={s(20)} color={colors.blue[400]} />} value="0.23.1" />*/}
                     </Box>

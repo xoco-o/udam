@@ -32,6 +32,7 @@ import { addSheetOpenState, userState } from "./utils/recoilAtoms";
 import ViewItemsScreen from "./screens/ViewItems";
 import OneAdScreen from "./screens/OneAd";
 import CoachScreen from "./screens/Coach";
+import StaticPageScreen from "./screens/StaticPage";
 
 export default function App() {
     return (
@@ -79,6 +80,7 @@ function Main() {
                 <Stack.Screen name="Articles" component={ArticlesScreen} options={{ headerBackTitle: "", headerTitle: "Мэдээ, нийтлэл" }} />
                 <Stack.Screen name="OneArticle" component={OneArticleScreen} options={{ headerBackTitle: "", headerTitle: "Мэдээ" }} />
                 <Stack.Screen name="Teams" component={TeamsScreen} options={{ headerBackTitle: "", headerTitle: "Галууд" }} />
+                <Stack.Screen name="StaticPage" component={StaticPageScreen} options={({route})=>({title: route.params.headTitle})} />
                 <Stack.Screen
                     name="OneTeam"
                     component={OneTeamsScreen}

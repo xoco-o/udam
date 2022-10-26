@@ -16,6 +16,7 @@ export default function ListItem({
     rootChild,
     imageChild,
     location,
+    textChild,
 }) {
     // console.log('33333333',urls.resource + image.source)
     return (
@@ -66,6 +67,7 @@ export default function ListItem({
                             <Text style={{ marginBottom: s(5), fontSize: s(13), marginTop: s(5), color: colors.grey[600] }}><MaterialCommunityIcons name="map-marker" size={s(15)} color={colors.grey[600]} /> {location}</Text>
                         </>
                     )}
+                    {textChild}
                 </View>
                 {rootChild}
             </View>
