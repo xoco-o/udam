@@ -63,9 +63,6 @@ function HomeStack () {
             <Stack.Screen name="RaceWinners" component={RaceWinnersScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
             <Stack.Screen name="Ranks" component={RanksScreen} options={{ headerBackTitle: "", headerTitle: "Төрийн түмэн эхүүд" }} />
             <Stack.Screen name="RankedHorses" component={RankedHorsesScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
-            <Stack.Screen name="OneAd" component={OneAdScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
-            <Stack.Screen name="Coach" component={CoachScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
-            <Stack.Screen name="ViewItems" component={ViewItemsScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
         </Stack.Navigator>
     );
 }
@@ -88,6 +85,9 @@ function Main() {
                 />
                 <Stack.Screen name="CreateAd" component={CreateAdScreen} options={{ headerBackTitle: "", headerTitle: "Зар нэмэх" }} />
                 <Stack.Screen name="CreateHorse" component={CreateHorseScreen} options={{ headerBackTitle: "", headerTitle: "Адуу нэмэх" }} />
+                <Stack.Screen name="OneAd" component={OneAdScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
+                <Stack.Screen name="Coach" component={CoachScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
+                <Stack.Screen name="ViewItems" component={ViewItemsScreen} options={{ headerBackTitle: "", headerTitle: "" }} />
             </Stack.Navigator>
             <StatusBar style="dark" />
             <AddSheet />

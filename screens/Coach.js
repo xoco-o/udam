@@ -19,6 +19,12 @@ import {useNavigation} from "@react-navigation/native";
 export default function CoachScreen({ route }) {
     const [data, setData] = useState([]);
     const [horses, setHorses] = useState([]);
+    const [gold, setGold] = useState(null);
+    const [silver, setSilver] = useState(null);
+    const [bronze, setBronze] = useState(null);
+    let goldCount=null;
+    let silverCount=null;
+    let bronzeCount=null;
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -33,6 +39,16 @@ export default function CoachScreen({ route }) {
             }
         });
     }, []);
+    useEffect(() => {
+        horses.map((horse) => {
+            goldCount = goldCount + horse.rewardGoldCount;
+            silverCount = silverCount + horse.rewardSilverCount;
+            bronzeCount = bronzeCount + horse.rewardBronzeCount;
+        });
+        setGold(goldCount);
+        setSilver(silverCount);
+        setBronze(bronzeCount);
+    }, [horses]);
 
     return (
         data?
@@ -42,6 +58,11 @@ export default function CoachScreen({ route }) {
                     <View style={{ alignItems: "center", marginVertical: s(30) }}>
                         <UserAvatar size={s(100)}  userImage={typeof data.image !== 'undefined' ? data.image.name +'_s.'+ data.image.ext : null}/>
                         <Text style={{ fontSize: s(16), marginTop: s(10), fontWeight: '500' }}>{data.name}</Text>
+                        <View style={{ position: "absolute", bottom: s(25), paddingLeft: s(10), flexDirection: "row"}}>
+                            <Medals color="orange" count={gold} />
+                            <Medals color="grey" count={silver} />
+                            <Medals color="deepOrange" count={bronze} />
+                        </View>
                     </View>
 
                     <Box color={colors.white}>
@@ -58,20 +79,23 @@ export default function CoachScreen({ route }) {
                         <Text style={{ fontSize: s(16), margin: s(15), fontWeight: '500' }}>Морьд</Text>
                         {
                             horses?
-                                horses.map((horse, index) => (
-                                    <ListItem
-                                        title={`${horse.name}`}
-                                        image={{ source: typeof horse.image !== 'undefined' ? horse.image.path : 'no-image', width: s(120), height: s(67.5) }}
-                                        imageChild={
-                                            <View style={{ position: "absolute", top: s(5), left: s(5), flexDirection: "row" }}>
-                                                <Medals color="orange" count={horse.rewardGoldCount} />
-                                                <Medals color="grey" count={horse.rewardSilverCount} />
-                                                <Medals color="deepOrange" count={horse.rewardBronzeCount} />
-                                            </View>
-                                        }
-                                        onPress={() => navigation.navigate("ViewItems", { url: 'horse/'+horse.id })}
-                                    />
-                                ))
+                                horses.map((horse, index) => {
+                                    return(
+                                        <ListItem
+                                            key={horse.id}
+                                            title={`${horse.name}`}
+                                            image={{ source: typeof horse.image !== 'undefined' ? horse.image.path : 'no-image', width: s(120), height: s(67.5) }}
+                                            imageChild={
+                                                <View style={{ position: "absolute", top: s(5), left: s(5), flexDirection: "row" }}>
+                                                    <Medals color="orange" count={horse.rewardGoldCount} />
+                                                    <Medals color="grey" count={horse.rewardSilverCount} />
+                                                    <Medals color="deepOrange" count={horse.rewardBronzeCount} />
+                                                </View>
+                                            }
+                                            onPress={() => navigation.navigate("ViewItems", { url: 'horse/'+horse.id })}
+                                        />
+                                    )
+                                })
                                 :<></>
                         }
                     </Box>
